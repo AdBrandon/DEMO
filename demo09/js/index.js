@@ -6,7 +6,7 @@ $(function() {
 		pageAll = $section.length;
 	$section.css("height", height + "px");
 	$("body").css("margin", "0").css("padding", "0")
-		.append("<div class='container' style='position:fixed;top:0;right:0;bottom:0;left:0;'><div class='page' style='transition:all ease 1s;'></div><div class='aside' style='position:fixed;top:50%;right:0;z-index:99;width:40px;'><ul style='margin:0;position:relative;'><li class='liPointer' style='position:absolute;color:#fff;font-size:35px;line-height:30px;top:0;cursor:pointer;transition:top ease 1s;'></li></ul></div></div>");
+		.append("<div class='container' style='position:fixed;top:0;right:0;bottom:0;left:0;'><div class='page' style='transition:all ease 1s;'></div><div class='aside' style='position:fixed;top:50%;right:0;z-index:99;width:0px;'><ul style='margin:0;position:relative;'><li class='liPointer' style='position:absolute;color:#fff;font-size:35px;line-height:30px;top:0;cursor:pointer;transition:top ease 1s;'></li></ul></div></div>");
 	var $page = $(".page"),
 		$liPointer = $(".liPointer"),
 		$aside = $(".aside");
