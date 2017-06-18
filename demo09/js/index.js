@@ -89,19 +89,19 @@ $(function() {
 	//手机端触摸事件
 	function touchStartEvent(event){
 		$(".test").html($(".test").html()+"start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
-		$(".test").html($(".test").html()+"start:[pageY] = " + event.targetTouches[0].pageY + "<br>");
-		event.preventDefault();
+		$(".test").html($(".test").html()+"start:[targetTouches:pageY] = " + event.targetTouches[0].pageY + "<br>");
+		// event.preventDefault();
 	}
 	function touchMoveEvent(event){
-		$(".test").html($(".test").html()+"move:[clientY] = " + event.targetTouches[0].clientY + "<br>");
-		$(".test").html($(".test").html()+"move:[pageY] = " + event.targetTouches[0].pageY + "<br>");
-		event.preventDefault();
+		$(".test").html($(".test").html()+"move:[targetTouches:clientY] = " + event.targetTouches[0].clientY + "<br>");
+		$(".test").html($(".test").html()+"move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
+		// event.preventDefault();
 	}
 
 	function touchEndEvent(event){
 		$(".test").html($(".test").html()+"end:[clientY] = " + event.targetTouches[0].clientY + "<br>");
-		$(".test").html($(".test").html()+"end:[pageY] = " + event.targetTouches[0].pageY + "<br>");
-		event.preventDefault();
+		$(".test").html($(".test").html()+"end:[changedTouches:pageY] = " + event.changedTouches[0].pageY + "<br>");
+		// event.preventDefault();
 	}
 
 
