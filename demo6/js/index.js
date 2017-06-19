@@ -87,7 +87,6 @@ $(function() {
 		}
 	};
 	//手机端触摸事件
-
 	var u = navigator.userAgent,
 		isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
 		touchClientY = 0,
@@ -97,10 +96,9 @@ $(function() {
 		refresh = false;
 		touchClientY = event.touches[0].clientY;
 		touchTime = new Date();
-		if (pageNow != 1) {
+		if (pageNow = 1 && !isiOS) {
 			refresh = true;
-			event.preventDefault();
-		} else if (isiOS) {
+		} else {
 			event.preventDefault();
 		}
 	});
@@ -110,12 +108,16 @@ $(function() {
 		var moveTime = touchEndTime.getTime() - touchTime.getTime();
 		if (moveY > 70 && moveTime < 700) {
 			wheel.up();
+			event.preventDefault();
 		} else if (moveY < -70 && moveTime < 700) {
 			wheel.down();
+			if (!refresh) {
+				event.preventDefault();
+			}
 		}
 		touchClientY = 0;
 		touchTime = null;
-		event.preventDefault();
+
 	});
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
