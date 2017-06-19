@@ -1,5 +1,5 @@
 $(function() {
-	$("#progressBar").css("width","60%");
+	$("#progressBar").css("width", "70%");
 	var $section = $(".section"),
 		height = innerHeight,
 		pageNow = 1,
@@ -87,21 +87,19 @@ $(function() {
 		}
 	};
 	//手机端触摸事件
-	function touchStartEvent(event){
+	function touchStartEvent(event) {
 		event.preventDefault();
 		var pageY = event.targetTouches[0].pageY;
-		$page[0].addEventListener("touchmove", function(event){
-			$(".test").html($(".test").html()+"move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
+		$page[0].addEventListener("touchmove", function(event) {
+			$(".test").html($(".test").html() + "move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
 
 		});
-		$page[0].addEventListener("touchend", function(event){
-			$(".test").html($(".test").html()+"end:[touches:pageY] = " + event.touches[0].pageY + "<br>");
-			$(".test").html($(".test").html()+"start=pageY = " + pageY + "<br>");
+		$page[0].addEventListener("touchend", function(event) {
+			$(".test").html($(".test").html() + "end:[touches:pageY] = " + event.touches[0].pageY + "<br>");
+			$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
 			$page[0].ontouchend = null;
 		});
-		
-
-
+	}
 
 
 
@@ -127,8 +125,6 @@ $(function() {
 	// 	$(".test").html($(".test").html()+"Cancel:[changedTouches:pageY] = " + event.changedTouches[0].pageY + "<br>");
 	// 	// event.preventDefault();
 	// }
-
-
 
 
 
@@ -172,6 +168,6 @@ $(function() {
 	// $page[0].addEventListener("touchend", touchEndEvent);
 	// $page[0].addEventListener("touchcancel", touchCancelEvent);
 
-	$("#progressBar").css("width","100%");
+	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
 })
