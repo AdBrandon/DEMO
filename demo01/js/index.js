@@ -88,11 +88,16 @@ $(function() {
 	};
 	//手机端触摸事件
 	var touchClientY = 0,
-		touchTime;
+		touchTime,
+		refresh;
 	$page[0].addEventListener("touchstart", function(event) {
+		refresh = false;
 		touchClientY = event.touches[0].clientY;
 		touchTime = new Date();
-		event.preventDefault();
+		if ( pageNow != 1) {
+			refresh = true;
+			event.preventDefault();
+		}
 	});
 	$page[0].addEventListener("touchend", function(event) {
 		var moveY = event.changedTouches[0].clientY - touchClientY;
@@ -105,7 +110,9 @@ $(function() {
 		}
 		touchClientY = 0;
 		touchTime = null;
-		event.preventDefault();
+		if (!refresh) {
+			event.preventDefault();
+		}
 	});
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
