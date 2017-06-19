@@ -105,29 +105,24 @@ $(function() {
 	// 		$page[0].ontouchend = null;
 	// 	});
 	// }
-	function load() {
-		$page[0].addEventListener('touchstart', touch, false);
-		$page[0].addEventListener('touchmove', touch, false);
-		$page[0].addEventListener('touchend', touch, false);
-
-		function touch(event) {
-			var event = event || window.event;
-			var oInp =$(".test")[0];
-			switch (event.type) {
-				case "touchstart":
-					oInp.innerHTML += "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-					break;
-				case "touchend":
-					oInp.innerHTML += "<br>Touch end (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
-					break;
-				case "touchmove":
-					event.preventDefault();
-					oInp.innerHTML += "<br>Touch moved (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-					break;
-			}
-		}
-	}
-	window.addEventListener('load', load, false);
+	 $page[0].addEventListener("touchstart", function(){
+	 	$(".test").html($(".test").html()+"touchstart<br>");
+	 });
+	 $page[0].addEventListener("touchmove", function(){
+	 	$(".test").html($(".test").html()+"touchmove<br>");
+	 });
+	 $page[0].addEventListener("touchend", function(){
+	 	$(".test").html($(".test").html()+"touchend<br>");
+	 });
+	  $page[0].addEventListener("mousedown", function(){
+	 	$(".test").html($(".test").html()+"mousedown<br>");
+	 });
+	   $page[0].addEventListener("onmousemove", function(){
+	 	$(".test").html($(".test").html()+"onmousemove<br>");
+	 });
+	    $page[0].addEventListener("onmouseup", function(){
+	 	$(".test").html($(".test").html()+"onmouseup<br>");
+	 });
 
 
 	// 	$(".test").html($(".test").html()+"[B]start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
