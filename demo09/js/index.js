@@ -87,29 +87,12 @@ $(function() {
 		}
 	};
 	//手机端触摸事件
-	// function touchStartEvent(event) {
-	// 	event.preventDefault();
-	// 	var pageY = event.targetTouches[0].pageY;
-	// 	$page[0].addEventListener("touchmove", function(event) {
-	// 		$(".test").html($(".test").html() + "move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
-
-	// 	});
-	// 	$page[0].addEventListener("touchend", function(event) {
-	// 		$(".test").html($(".test").html() + "end:[touches:pageY] = " + event.touches[0].pageY + "<br>");
-	// 		$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
-	// 		$page[0].ontouchend = null;
-	// 	});
-	// 	$page[0].addEventListener("mouseup", function(event) {
-	// 		$(".test").html($(".test").html() + "mouseup:[touches:pageY] = " + event.clientY + "<br>");
-	// 		$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
-	// 		$page[0].ontouchend = null;
-	// 	});
-	// }
 	var touchClientY = 0,
 		touchTime;
 	$page[0].addEventListener("touchstart", function(event) {
 		touchClientY = event.touches[0].clientY;
 		touchTime = new Date();
+		event.preventDefault();
 	});
 	$page[0].addEventListener("touchend", function(event) {
 		var moveY = event.changedTouches[0].clientY - touchClientY;
@@ -124,32 +107,6 @@ $(function() {
 		touchTime = null;
 		event.preventDefault();
 	});
-
-	// 	$(".test").html($(".test").html()+"[B]start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
-	// 	$(".test").html($(".test").html()+"start:[targetTouches:pageY] = " + event.targetTouches[0].pageY + "<br>");
-	// 	// event.preventDefault();
-	// 	event.preventDefault();
-
-	// }
-	// function touchMoveEvent(event){
-	// 	$(".test").html($(".test").html()+"[B]move:[targetTouches:clientY] = " + event.targetTouches[0].clientY + "<br>");
-	// 	$(".test").html($(".test").html()+"move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
-	// 	// event.preventDefault();
-	// }
-
-	// function touchEndEvent(event){
-	// 	$(".test").html($(".test").html()+"[B]end:[clientY] = " + event.targetTouches[0].clientY + "<br>");
-	// 	$(".test").html($(".test").html()+"end:[changedTouches:pageY] = " + event.changedTouches[0].pageY + "<br>");
-	// 	// event.preventDefault();
-	// }
-	// function touchCancelEvent(event){
-	// 	$(".test").html($(".test").html()+"[B]Cancel:[clientY] = " + event.targetTouches[0].clientY + "<br>");
-	// 	$(".test").html($(".test").html()+"Cancel:[changedTouches:pageY] = " + event.changedTouches[0].pageY + "<br>");
-	// 	// event.preventDefault();
-	// }
-
-
-
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
 		var width = window.innerWidth;
@@ -185,11 +142,6 @@ $(function() {
 	} else {
 		document.addEventListener("mousewheel", mousewheelEvent);
 	};
-	// $page[0].addEventListener("touchstart", touchStartEvent);
-	// $page[0].addEventListener("touchmove", touchMoveEvent);
-	// $page[0].addEventListener("touchend", touchEndEvent);
-	// $page[0].addEventListener("touchcancel", touchCancelEvent);
-
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
 })
