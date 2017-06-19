@@ -94,7 +94,7 @@ $(function() {
 		refresh = false;
 		touchClientY = event.touches[0].clientY;
 		touchTime = new Date();
-		if ( pageNow != 1) {
+		if (pageNow != 1) {
 			refresh = true;
 			event.preventDefault();
 		}
@@ -105,14 +105,15 @@ $(function() {
 		var moveTime = touchEndTime.getTime() - touchTime.getTime();
 		if (moveY > 70 && moveTime < 700) {
 			wheel.up();
+			if (!refresh) {
+				event.preventDefault();
+			}
 		} else if (moveY < -70 && moveTime < 700) {
 			wheel.down();
+			event.preventDefault();
 		}
 		touchClientY = 0;
 		touchTime = null;
-		if (!refresh) {
-			event.preventDefault();
-		}
 	});
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
