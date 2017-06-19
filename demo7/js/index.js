@@ -1,3 +1,4 @@
+//网页wheel
 $(function() {
 	$("#progressBar").css("width", "70%");
 	var $section = $(".section"),
@@ -146,4 +147,61 @@ $(function() {
 	};
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
+})
+
+//全屏
+$(function() {
+	var isFullScreen = false;
+	//全屏  
+	function fullScreen() {
+		isFullScreen = true;
+		var element = document.documentElement;
+		if (window.ActiveXObject) {
+			var WsShell = new ActiveXObject('WScript.Shell')
+			WsShell.SendKeys('{F11}');
+		}
+		else if (element.requestFullScreen) {
+			element.requestFullScreen();
+		}
+		else if (element.msRequestFullscreen) {
+			element.msRequestFullscreen();
+		}
+		else if (element.webkitRequestFullScreen) {
+			element.webkitRequestFullScreen();
+		}
+		else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		}
+	};
+	//退出全屏  
+	function fullExit() {
+		isFullScreen = false;
+		var element = document.documentElement; 
+		if (window.ActiveXObject) {
+			var WsShell = new ActiveXObject('WScript.Shell')
+			WsShell.SendKeys('{F11}');
+		}
+		else if (element.requestFullScreen) {
+			document.exitFullscreen();
+		}
+		else if (element.msRequestFullscreen) {
+			document.msExitFullscreen();
+		}
+		else if (element.webkitRequestFullScreen) {
+			document.webkitCancelFullScreen();
+		}
+		else if (element.mozRequestFullScreen) {
+			document.mozCancelFullScreen();
+		}
+	};
+	$(".fullScreen p").click(function(){
+		if (isFullScreen) {
+			fullExit();
+			$(this).html("<span>☒</span>全屏浏览");
+		} else {
+			fullScreen();
+			$(this).html("<span>×</span>退出全屏");
+		}
+	});
+
 })

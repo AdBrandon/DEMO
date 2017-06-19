@@ -1,1 +1,17 @@
-* { margin: 0; padding: 0 }
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.fullScreen {
+	padding: 10px;
+	float: left;
+}
+.fullScreen p {
+	font-size: 12px;
+	color: #999;
+	cursor: pointer;
+}
+.fullScreen span {
+	font-size: 14px;
+}
