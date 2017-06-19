@@ -99,6 +99,11 @@ $(function() {
 			$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
 			$page[0].ontouchend = null;
 		});
+		$page[0].addEventListener("mouseup", function(event) {
+			$(".test").html($(".test").html() + "mouseup:[touches:pageY] = " + event.clientY + "<br>");
+			$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
+			$page[0].ontouchend = null;
+		});
 	}
 
 
