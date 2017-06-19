@@ -105,7 +105,24 @@ $(function() {
 	// 		$page[0].ontouchend = null;
 	// 	});
 	// }
-
+	var touchClientY = 0,
+		touchTime;
+	$page[0].addEventListener("touchstart", function(event) {
+		touchClientY = event.touches[0].clientY;
+		touchTime = new Date();
+	});
+	$page[0].addEventListener("touchend", function(event) {
+		var moveY = event.changedTouches[0].clientY - touchClientY;
+		var touchEndTime = new Date();
+		var moveTime = touchEndTime.getTime() - touchTime.getTime();
+		if (moveY > 70 && moveTime < 700) {
+			wheel.up();
+		} else if (moveY < -70 && moveTime < 700) {
+			wheel.down();
+		}
+		touchClientY = 0;
+		touchTime = null;
+	});
 
 	// 	$(".test").html($(".test").html()+"[B]start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
 	// 	$(".test").html($(".test").html()+"start:[targetTouches:pageY] = " + event.targetTouches[0].pageY + "<br>");

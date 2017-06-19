@@ -23,23 +23,5 @@
 		<script type="text/javascript">
 			document.getElementById("progressBar").style.width = "50%";
 		</script>
-		<script type="text/javascript">
-$(function() {
-	var $page = $(".page");
-	$page[0].addEventListener("touchstart", function(event) {
-		$(".test").html($(".test").html() + "touchstart<br>");
-		$(".test").html($(".test").html() + event.touches[0].clientY + "<br>");
-	});
-	$page[0].addEventListener("touchmove", function() {
-		$(".test").html($(".test").html() + "touchmove<br>");
-	});
-	$page[0].addEventListener("touchend", function(event) {
-		$(".test").html($(".test").html() + "touchend<br>");
-		$(".test").html($(".test").html() + event.changedTouches[0].clientY + "<br>");
-
-	});
-	$(".test").html("321<br>");
-});	
-		</script>
 	</body>
 </html>
