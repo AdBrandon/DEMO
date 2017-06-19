@@ -94,10 +94,10 @@ $(function() {
 		refresh = false;
 		touchClientY = event.touches[0].clientY;
 		touchTime = new Date();
-		if (pageNow != 1) {
-			refresh = true;
-			event.preventDefault();
-		}
+		// if (pageNow != 1) {
+		// 	refresh = true;
+		// 	event.preventDefault();
+		// }
 	});
 	$page[0].addEventListener("touchend", function(event) {
 		var moveY = event.changedTouches[0].clientY - touchClientY;
@@ -105,12 +105,12 @@ $(function() {
 		var moveTime = touchEndTime.getTime() - touchTime.getTime();
 		if (moveY > 70 && moveTime < 700) {
 			wheel.up();
-			if (!refresh) {
-				event.preventDefault();
-			}
+			// if (!refresh) {
+			// 	event.preventDefault();
+			// }
 		} else if (moveY < -70 && moveTime < 700) {
 			wheel.down();
-			event.preventDefault();
+			// event.preventDefault();
 		}
 		touchClientY = 0;
 		touchTime = null;
