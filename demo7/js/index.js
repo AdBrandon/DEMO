@@ -7,16 +7,16 @@ $(function() {
 		pageAll = $section.length;
 	$section.css("height", height + "px");
 	$("body").css("margin", "0").css("padding", "0")
-		.append("<div class='container' style='position:fixed;top:0;right:0;bottom:0;left:0;'><div class='page' style='transition:all ease 1s;'></div><div class='aside' style='position:fixed;top:50%;right:0;z-index:99;width:0px;'><ul style='margin:0;position:relative;'><li class='liPointer' style='position:absolute;color:#fff;font-size:35px;line-height:30px;top:0;cursor:pointer;transition:top ease 1s;'></li></ul></div></div>");
+		.append("<div class='container'><div class='page'></div>");
 	var $page = $(".page"),
 		$liPointer = $(".liPointer"),
 		$aside = $(".aside");
+	$nav = $(".asideNav");
 	$page.append($section);
 	$page.append($section.first().clone(true));
-	for (var i = 0; i < $section.length; i++) {
-		$(".aside ul").append("<li class='li' style='color:#fff;list-style-type:circle;font-size:35px;line-height:30px;cursor:pointer;' data-index='" + (i + 1) + "'>&nbsp;</li>");
-	}
-	$aside[0].style.marginTop = -$aside[0].offsetHeight / 2 + "px";
+	$("container").append(".aside");
+	$nav[0].style.marginTop = -$nav[0].offsetHeight / 2 + "px";
+	$(".asideOpen")[0].style.marginTop = -$nav[0].offsetHeight / 2 - 50 + "px";
 	var wheel = {
 		scrolling: false,
 		down: function() {
@@ -145,6 +145,46 @@ $(function() {
 	} else {
 		document.addEventListener("mousewheel", mousewheelEvent);
 	};
+	//aside固定
+	var $open = $(".asideOpen");
+	var asideOpen = {
+		transitting: false,
+		transit: function() {
+			if (asideOpen.transitting) {
+				return false
+			}
+			asideOpen.transitting = true;
+			$open.css("transition", "all ease 0.5s")
+			asideOpen.changeStyle();
+		},
+		changeStyle:function(){
+			if ($open.html() == "☆") {
+				$open.css("transform", "rotate(360deg)");
+				$open.html("★");
+				$aside.addClass("asideFixed")
+				$(".aside ul,.asideOpen").addClass("asideColorFixed")
+				$(".asideTitle").addClass("asideTitleFixed")
+			} else {
+				$open.css("transform", "rotate(0deg)");
+				$open.html("☆") 
+				$aside.removeClass("asideFixed")
+				$(".aside ul,.asideOpen").removeClass("asideColorFixed")
+				$(".asideTitle").removeClass("asideTitleFixed")
+				
+			}
+		},
+		transitEnd: function() {
+			asideOpen.transitting = false;
+		}
+	}
+
+	$open.click(function() {
+		asideOpen.transit()
+	})
+	$open[0].addEventListener("webkitTransitionEnd", asideOpen.transitEnd);
+
+
+
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
 })
@@ -159,42 +199,34 @@ $(function() {
 		if (window.ActiveXObject) {
 			var WsShell = new ActiveXObject('WScript.Shell')
 			WsShell.SendKeys('{F11}');
-		}
-		else if (element.requestFullScreen) {
+		} else if (element.requestFullScreen) {
 			element.requestFullScreen();
-		}
-		else if (element.msRequestFullscreen) {
+		} else if (element.msRequestFullscreen) {
 			element.msRequestFullscreen();
-		}
-		else if (element.webkitRequestFullScreen) {
+		} else if (element.webkitRequestFullScreen) {
 			element.webkitRequestFullScreen();
-		}
-		else if (element.mozRequestFullScreen) {
+		} else if (element.mozRequestFullScreen) {
 			element.mozRequestFullScreen();
 		}
 	};
 	//退出全屏  
 	function fullExit() {
 		isFullScreen = false;
-		var element = document.documentElement; 
+		var element = document.documentElement;
 		if (window.ActiveXObject) {
 			var WsShell = new ActiveXObject('WScript.Shell')
 			WsShell.SendKeys('{F11}');
-		}
-		else if (element.requestFullScreen) {
+		} else if (element.requestFullScreen) {
 			document.exitFullscreen();
-		}
-		else if (element.msRequestFullscreen) {
+		} else if (element.msRequestFullscreen) {
 			document.msExitFullscreen();
-		}
-		else if (element.webkitRequestFullScreen) {
+		} else if (element.webkitRequestFullScreen) {
 			document.webkitCancelFullScreen();
-		}
-		else if (element.mozRequestFullScreen) {
+		} else if (element.mozRequestFullScreen) {
 			document.mozCancelFullScreen();
 		}
 	};
-	$(".fullScreen p").click(function(){
+	$(".fullScreen p").click(function() {
 		if (isFullScreen) {
 			fullExit();
 			$(this).html("<span>☒</span>全屏浏览");

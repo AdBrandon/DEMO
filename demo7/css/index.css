@@ -3,15 +3,150 @@
 	padding: 0;
 	font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
-.fullScreen {
-	padding: 10px;
-	float: left;
+
+/*进度条*/
+.progressMask {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
 }
-.fullScreen p {
-	font-size: 12px;
-	color: #999;
+.progressBar {
+	width: 25%;
+	background-color: #d93a49;
+	height: 5px;
+	box-shadow: 0 0 15px #000;
+}
+
+/*全屏按钮*/
+.fullScreen {
+	display: none;
+}
+@media only screen and (min-width:950px) {
+	.fullScreen {
+		display: block;
+		padding: 10px;
+		float: right;
+	}
+	.fullScreen p {
+		font-size: 12px;
+		color: #999;
+		cursor: pointer;
+	}
+	.fullScreen span {
+		font-size: 14px;
+	}
+}
+
+/*页面容器*/
+.container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.page {
+	transition: all ease 1s;
+}
+
+/*导航栏*/
+.aside {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99;
+	width: 40px;
+	overflow: hidden;
+	transition: all ease 0.5s;
+}
+.asideOpen {
+	color: #fff;
+	font-size: 25px;
+	margin-left: 9px;
+	position: absolute;
+	top: 50%;
+}
+.asideNav {
+	position: absolute;
+	top: 50%;
+	width: 300px;
+}
+.aside li, .asideOpen {
 	cursor: pointer;
 }
-.fullScreen span {
-	font-size: 14px;
+.pointer {
+	float: left;
+	line-height: 30px;
+	list-style-type: circle;
+	font-size: 35px;
+	color: #fff;
+}
+.aside .pointer .liPointer {
+	list-style-type: disc;
+	position: absolute;
+	top: 0;
+	transition: top ease 1s;
+	z-index: -99;
+}
+.asideTitle {
+	overflow: hidden;
+	float: right;
+	line-height: 30px;
+	list-style-type: none;
+	margin-right: 500px;
+	margin-left: -500px;
+	color: #fff;
+	transition: all ease 0.7s;
+	text-align: right;
+}
+.aside .pointer li {
+	list-style-position: inside;
+	float: left;
+	margin-left: 13px;
+	width: 25px;
+	overflow: hidden;
+}
+.asideTitle li, .aside ul div {
+	float: right;
+}
+.asideTitle div {
+	width: 0px;
+	margin: 14px auto;
+	height: 1px;
+	background-color: #ccc;
+}
+.aside .pointer div {
+	margin: 7px 0 7px 0;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 8px solid transparent;
+}
+.aside:hover ,.asideFixed{
+	width: 250px ;
+	background-color: #fff ;
+	box-shadow: 0 0 20px #666 ;
+}
+.aside:hover ul, .aside:hover .asideOpen ,.asideColorFixed{
+	color: #777 ;
+}
+.aside:hover .asideTitle ,.asideTitleFixed{
+	margin-right: 85px;
+}
+.asideTitle li:hover {
+	transition: all ease 0.7s;
+	font-size: 24px;
+	color:#333;
+}
+.asideTitle li:hover + div {
+	transition: width ease 1.5s;
+	width: 127px;
+}
+.aside .pointer li:hover + div {
+	transition: all ease 1s;
+	border-left-color: #777;
 }
