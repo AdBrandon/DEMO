@@ -122,6 +122,7 @@ $(function() {
 		}
 		touchClientY = 0;
 		touchTime = null;
+		event.preventDefault();
 	});
 
 	// 	$(".test").html($(".test").html()+"[B]start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
