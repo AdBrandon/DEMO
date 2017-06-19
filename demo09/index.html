@@ -25,6 +25,7 @@
 		</script>
 		<script type="text/javascript">
 $(function() {
+	var $page = $(".page");
 	$page[0].addEventListener("touchstart", function(event) {
 		$(".test").html($(".test").html() + "touchstart<br>");
 		$(".test").html($(".test").html() + event.touches[0].clientY + "<br>");
