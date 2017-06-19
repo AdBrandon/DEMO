@@ -87,25 +87,47 @@ $(function() {
 		}
 	};
 	//手机端触摸事件
-	function touchStartEvent(event) {
-		event.preventDefault();
-		var pageY = event.targetTouches[0].pageY;
-		$page[0].addEventListener("touchmove", function(event) {
-			$(".test").html($(".test").html() + "move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
+	// function touchStartEvent(event) {
+	// 	event.preventDefault();
+	// 	var pageY = event.targetTouches[0].pageY;
+	// 	$page[0].addEventListener("touchmove", function(event) {
+	// 		$(".test").html($(".test").html() + "move:[touches:pageY] = " + event.touches[0].pageY + "<br>");
 
-		});
-		$page[0].addEventListener("touchend", function(event) {
-			$(".test").html($(".test").html() + "end:[touches:pageY] = " + event.touches[0].pageY + "<br>");
-			$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
-			$page[0].ontouchend = null;
-		});
-		$page[0].addEventListener("mouseup", function(event) {
-			$(".test").html($(".test").html() + "mouseup:[touches:pageY] = " + event.clientY + "<br>");
-			$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
-			$page[0].ontouchend = null;
-		});
+	// 	});
+	// 	$page[0].addEventListener("touchend", function(event) {
+	// 		$(".test").html($(".test").html() + "end:[touches:pageY] = " + event.touches[0].pageY + "<br>");
+	// 		$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
+	// 		$page[0].ontouchend = null;
+	// 	});
+	// 	$page[0].addEventListener("mouseup", function(event) {
+	// 		$(".test").html($(".test").html() + "mouseup:[touches:pageY] = " + event.clientY + "<br>");
+	// 		$(".test").html($(".test").html() + "start=pageY = " + pageY + "<br>");
+	// 		$page[0].ontouchend = null;
+	// 	});
+	// }
+	function load() {
+		$page[0].addEventListener('touchstart', touch, false);
+		$page[0].addEventListener('touchmove', touch, false);
+		$page[0].addEventListener('touchend', touch, false);
+
+		function touch(event) {
+			var event = event || window.event;
+			var oInp =$(".test")[0];
+			switch (event.type) {
+				case "touchstart":
+					oInp.innerHTML += "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
+					break;
+				case "touchend":
+					oInp.innerHTML += "<br>Touch end (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
+					break;
+				case "touchmove":
+					event.preventDefault();
+					oInp.innerHTML += "<br>Touch moved (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
+					break;
+			}
+		}
 	}
-
+	window.addEventListener('load', load, false);
 
 
 	// 	$(".test").html($(".test").html()+"[B]start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
