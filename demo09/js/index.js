@@ -92,6 +92,7 @@ $(function() {
 		$(".test").html($(".test").html()+"start:[targetTouches:pageY] = " + event.targetTouches[0].pageY + "<br>");
 		// event.preventDefault();
 		event.preventDefault();
+		
 	}
 	function touchMoveEvent(event){
 		$(".test").html($(".test").html()+"[B]move:[targetTouches:clientY] = " + event.targetTouches[0].clientY + "<br>");
