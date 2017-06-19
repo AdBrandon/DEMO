@@ -92,7 +92,7 @@ $(function() {
 		$(".test").html($(".test").html()+"start:[targetTouches:pageY] = " + event.targetTouches[0].pageY + "<br>");
 		// event.preventDefault();
 		event.preventDefault();
-		
+
 	}
 	function touchMoveEvent(event){
 		$(".test").html($(".test").html()+"[B]move:[targetTouches:clientY] = " + event.targetTouches[0].clientY + "<br>");
@@ -103,6 +103,11 @@ $(function() {
 	function touchEndEvent(event){
 		$(".test").html($(".test").html()+"[B]end:[clientY] = " + event.targetTouches[0].clientY + "<br>");
 		$(".test").html($(".test").html()+"end:[changedTouches:pageY] = " + event.changedTouches[0].pageY + "<br>");
+		// event.preventDefault();
+	}
+	function touchCancelEvent(event){
+		$(".test").html($(".test").html()+"[B]Cancel:[clientY] = " + event.targetTouches[0].clientY + "<br>");
+		$(".test").html($(".test").html()+"Cancel:[changedTouches:pageY] = " + event.changedTouches[0].pageY + "<br>");
 		// event.preventDefault();
 	}
 
@@ -148,6 +153,8 @@ $(function() {
 	$page[0].addEventListener("touchstart", touchStartEvent);
 	$page[0].addEventListener("touchmove", touchMoveEvent);
 	$page[0].addEventListener("touchend", touchEndEvent);
+	$page[0].addEventListener("touchcancel", touchCancelEvent);
+
 	$("#progressBar").css("width","100%");
 	$("#progressMask").fadeOut(200);
 })
