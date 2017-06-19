@@ -105,18 +105,7 @@ $(function() {
 	// 		$page[0].ontouchend = null;
 	// 	});
 	// }
-	$page[0].addEventListener("touchstart", function(event) {
-		$(".test").html($(".test").html() + "touchstart<br>");
-		$(".test").html($(".test").html() + event.touches[0].clientY + "<br>");
-	});
-	$page[0].addEventListener("touchmove", function() {
-		$(".test").html($(".test").html() + "touchmove<br>");
-	});
-	$page[0].addEventListener("touchend", function(event) {
-		$(".test").html($(".test").html() + "touchend<br>");
-		$(".test").html($(".test").html() + event.changedTouches[0].clientY + "<br>");
 
-	});
 
 	// 	$(".test").html($(".test").html()+"[B]start:[clientY] = " + event.targetTouches[0].clientY + "<br>");
 	// 	$(".test").html($(".test").html()+"start:[targetTouches:pageY] = " + event.targetTouches[0].pageY + "<br>");
