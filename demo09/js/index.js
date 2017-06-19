@@ -190,7 +190,7 @@ $(function() {
 	} else {
 		document.addEventListener("mousewheel", mousewheelEvent);
 	};
-	$page[0].addEventListener("touchstart", touchStartEvent);
+	// $page[0].addEventListener("touchstart", touchStartEvent);
 	// $page[0].addEventListener("touchmove", touchMoveEvent);
 	// $page[0].addEventListener("touchend", touchEndEvent);
 	// $page[0].addEventListener("touchcancel", touchCancelEvent);
