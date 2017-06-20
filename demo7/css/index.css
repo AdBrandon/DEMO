@@ -25,21 +25,6 @@
 .fullScreen {
 	display: none;
 }
-@media only screen and (min-width:950px) {
-	.fullScreen {
-		display: block;
-		padding: 10px;
-		float: right;
-	}
-	.fullScreen p {
-		font-size: 12px;
-		color: #999;
-		cursor: pointer;
-	}
-	.fullScreen span {
-		font-size: 14px;
-	}
-}
 
 /*页面容器*/
 .container {
@@ -48,6 +33,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	background-color:  #CECECE;
 }
 .page {
 	transition: all ease 1s;
@@ -63,21 +49,12 @@
 	width: 40px;
 	overflow: hidden;
 	transition: all ease 0.5s;
-}
-.asideOpen {
-	color: #fff;
-	font-size: 25px;
-	margin-left: 9px;
-	position: absolute;
-	top: 50%;
+	background-color: rgba(150,150,150,0.2);
 }
 .asideNav {
 	position: absolute;
 	top: 50%;
 	width: 300px;
-}
-.aside li, .asideOpen {
-	cursor: pointer;
 }
 .pointer {
 	float: left;
@@ -93,60 +70,149 @@
 	transition: top ease 1s;
 	z-index: -99;
 }
-.asideTitle {
-	overflow: hidden;
-	float: right;
-	line-height: 30px;
-	list-style-type: none;
-	margin-right: 500px;
-	margin-left: -500px;
-	color: #fff;
-	transition: all ease 0.7s;
-	text-align: right;
-}
 .aside .pointer li {
 	list-style-position: inside;
 	float: left;
-	margin-left: 13px;
+	margin-left: 11px;
+	padding-left: 2px;
 	width: 25px;
 	overflow: hidden;
 }
 .asideTitle li, .aside ul div {
 	float: right;
 }
-.asideTitle div {
-	width: 0px;
-	margin: 14px auto;
-	height: 1px;
-	background-color: #ccc;
+.aside li, .asideOpen {
+	cursor: pointer;
 }
-.aside .pointer div {
-	margin: 7px 0 7px 0;
-	border-top: 8px solid transparent;
-	border-bottom: 8px solid transparent;
-	border-left: 8px solid transparent;
+.asideTitle {
+	display: none;
 }
-.aside:hover ,.asideFixed{
-	width: 250px ;
-	background-color: #fff ;
-	box-shadow: 0 0 20px #666 ;
+/*全屏按钮*/
+	.fullScreen {
+		display: block;
+		position: fixed;
+		right: 0;
+		top: 0;
+		padding: 10px;
+		float: right;
+		z-index: 9999;
+	}
+@media only screen and (min-width:950px) {
+
+	
+	.fullScreen p {
+		font-size: 12px;
+		color: #999;
+		cursor: pointer;
+	}
+	.fullScreen span {
+		font-size: 14px;
+	}
+
+	/*导航栏*/
+	.asideOpen {
+		color: #fff;
+		font-size: 25px;
+		margin-left: 9px;
+		position: absolute;
+		top: 50%;
+	}
+	.asideTitle {
+		display: inline-block;
+		overflow: hidden;
+		float: right;
+		line-height: 30px;
+		list-style-type: none;
+		margin-right: 500px;
+		margin-left: -500px;
+		color: #fff;
+		transition: all ease 0.7s;
+		text-align: right;
+	}
+	.asideTitle div {
+		width: 0px;
+		margin: 14px auto;
+		height: 1px;
+		background-color: #ccc;
+	}
+	.aside .pointer div {
+		margin: 7px 0 7px 0;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+		border-left: 8px solid transparent;
+	}
+	.aside:hover, .asideFixed {
+		width: 250px;
+		background-color: #f5f5f5;
+		box-shadow: 0 0 20px #666;
+	}
+	.aside:hover ul, .aside:hover .asideOpen, .asideColorFixed {
+		color: #777;
+	}
+	.aside:hover .asideTitle, .asideTitleFixed {
+		margin-right: 85px;
+	}
+	.asideTitle li:hover {
+		transition: all ease 0.7s;
+		font-size: 22px;
+		color: #222;
+	}
+	.asideTitle li:hover + div {
+		transition: width ease 1.5s;
+		width: 130px;
+	}
+	.aside .pointer li:hover + div {
+		transition: all ease 1s;
+		border-left-color: #777;
+	}
 }
-.aside:hover ul, .aside:hover .asideOpen ,.asideColorFixed{
-	color: #777 ;
+.section{
+	box-shadow: 0 0 20px #666;
+	position: relative;
+	overflow: hidden;
 }
-.aside:hover .asideTitle ,.asideTitleFixed{
-	margin-right: 85px;
+/*index*/
+
+.sectionABox{
+	width: 106%;
+	height: 106%;
+	position: absolute;
+	top: -2%;
+	left: -2%;
+	background: url(../img/index.jpg) no-repeat center ;
+	background-size: cover;
+	box-shadow: 0 0 20px #666;
+	/*transition: all ease 0.5s;*/
 }
-.asideTitle li:hover {
-	transition: all ease 0.7s;
-	font-size: 24px;
-	color:#333;
+.indexImg{
+	min-width: 100%;
+	min-height: 100%;
 }
-.asideTitle li:hover + div {
-	transition: width ease 1.5s;
-	width: 127px;
+.sectionALine{
+	position: absolute;
+	top: 10%;
+	right: 15%;
+	height: 75%;
+	width: 75%;
+	transition: all ease 0.5s;
+	/*border-right: 5px solid #e5e5e5;*/
+	/*box-shadow: */
 }
-.aside .pointer li:hover + div {
-	transition: all ease 1s;
-	border-left-color: #777;
+.sectionALineColor{
+	width: 2px;
+	height: 100%;
+	float: right;
+	background-color: rgba(170,76,38,0.3);
+	border-radius: 1px;
+	/*box-shadow: 0 0 5px #fff;*/
+
+}
+.sectionATitle{
+	float: right;
+	font-size: 7em;
+
+	letter-spacing:20px;
+	color: #905a3d;
+	/*font-style: italic;*/
+
 }

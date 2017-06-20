@@ -2,7 +2,7 @@
 $(function() {
 	$("#progressBar").css("width", "70%");
 	var $section = $(".section"),
-		height = innerHeight,
+		height = window.innerHeight,
 		pageNow = 1,
 		pageAll = $section.length;
 	$section.css("height", height + "px");
@@ -13,6 +13,7 @@ $(function() {
 		$aside = $(".aside");
 	$nav = $(".asideNav");
 	$page.append($section);
+	$page.append($section.find(".fullScreen"));
 	$page.append($section.first().clone(true));
 	$("container").append(".aside");
 	$nav[0].style.marginTop = -$nav[0].offsetHeight / 2 + "px";
@@ -112,17 +113,18 @@ $(function() {
 	});
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
-		var width = window.innerWidth;
-		if (width < 500) {
-			$aside[0].style.display = "none";
-		} else {
-			$aside[0].style.display = "block";
-		};
-		if (height != innerHeight) {
-			height = innerHeight;
+		// var width = window.innerWidth;
+		// if (width < 500) {
+		// 	$aside[0].style.display = "none";
+		// } else {
+		// 	$aside[0].style.display = "block";
+		// };
+		if (height != window.innerHeight) {
+			height = window.innerHeight;
 			$(".section").css("height", height + "px")
 			wheel.move(pageNow, true);
 		}
+		resizeIndex()
 	};
 	//检测是否为火狐浏览器
 	function isFirefox() {
@@ -157,7 +159,7 @@ $(function() {
 			$open.css("transition", "all ease 0.5s")
 			asideOpen.changeStyle();
 		},
-		changeStyle:function(){
+		changeStyle: function() {
 			if ($open.html() == "☆") {
 				$open.css("transform", "rotate(360deg)");
 				$open.html("★");
@@ -166,11 +168,11 @@ $(function() {
 				$(".asideTitle").addClass("asideTitleFixed")
 			} else {
 				$open.css("transform", "rotate(0deg)");
-				$open.html("☆") 
+				$open.html("☆")
 				$aside.removeClass("asideFixed")
 				$(".aside ul,.asideOpen").removeClass("asideColorFixed")
 				$(".asideTitle").removeClass("asideTitleFixed")
-				
+
 			}
 		},
 		transitEnd: function() {
@@ -226,14 +228,41 @@ $(function() {
 			document.mozCancelFullScreen();
 		}
 	};
-	$(".fullScreen p").click(function() {
+	$(".fullScreen p").click(function(event) {
 		if (isFullScreen) {
 			fullExit();
-			$(this).html("<span>☒</span>全屏浏览");
+			$(".fullScreen p").html("<span>☒</span>全屏浏览");
 		} else {
 			fullScreen();
-			$(this).html("<span>×</span>退出全屏");
+			$(".fullScreen p").html("<span>×</span>退出全屏");
 		}
 	});
 
 })
+
+//首页
+
+$(function() {
+	var $sectionABox = $(".sectionABox");
+	var $sectionALine = $(".sectionALine");
+	$sectionABox.mousemove(function(event) {
+			var width = window.innerWidth,
+				height = window.innerHeight,
+				boxValueX = -(event.pageX - width / 2) * 10 / width - 0.02 * width,
+				boxValueY = -(event.pageY - height / 2) * 10 / height - 0.02 * height;
+			$sectionABox.css("left", boxValueX + "px");
+			$sectionABox.css("top", boxValueY + "px");
+			var lineValueX = -(event.pageX - width / 2) * 20 / width + 0.15 * width,
+				lineValueY = -(event.pageY - height / 2) * 15 / height + 0.1 * height;
+			$sectionALine.css("right", lineValueX + "px");
+			$sectionALine.css("top", lineValueY + "px");
+		})
+})
+
+
+//重置index窗口位置
+function resizeIndex(){
+	// $(".sectionALine").css("transition","all ease 0.5s");
+	$(".sectionALine").css("right","15%");
+	$(".sectionALine").css("top","10%");
+}
