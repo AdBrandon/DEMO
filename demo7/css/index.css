@@ -33,7 +33,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color:  #CECECE;
+	background-color: #CECECE;
 }
 .page {
 	transition: all ease 1s;
@@ -49,7 +49,7 @@
 	width: 40px;
 	overflow: hidden;
 	transition: all ease 0.5s;
-	background-color: rgba(150,150,150,0.2);
+	background-color: rgba(150, 150, 150, 0.2);
 }
 .asideNav {
 	position: absolute;
@@ -87,7 +87,74 @@
 .asideTitle {
 	display: none;
 }
-/*全屏按钮*/
+.section {
+	box-shadow: 0 0 20px #666;
+	position: relative;
+	overflow: hidden;
+}
+
+/*index*/
+.sectionABox {
+	width: 106%;
+	height: 106%;
+	position: absolute;
+	top: -2%;
+	left: -2%;
+	background: url(../img/index.jpg) no-repeat center;
+	background-size: cover;
+	box-shadow: 0 0 20px #666;
+}
+.sectionALine {
+	position: absolute;
+	top: -100%;
+	right: 15%;
+	height: 75%;
+	width: 100%;
+	transition: all ease 0.5s;
+	border-right: 2px solid rgba(170, 76, 38, 0.3);
+	overflow: hidden;
+}
+.sectionALineColor {
+	width: 2px;
+	height: 100%;
+	float: right;
+	background-color: rgba(170, 76, 38, 0.3);
+	border-radius: 1px;
+	box-shadow: 0 0 5px #fff;
+}
+.sectionALine h1, .sectionALine p {
+	float: right;
+	width: 80%;
+	text-align: right;
+	cursor: default;
+}
+.sectionALine h1 {
+	font-size: 100px;
+	line-height: 100px;
+	letter-spacing: 25px;
+	color: #905a3d;
+	margin-right: 100%;
+}
+.sectionALine .en {
+	font-family: "STXihei";
+	font-size: 30px;
+	letter-spacing: 12px;
+}
+.sectionAText {
+	font-family: "STXihei";
+	padding-right: 10px;
+	position: absolute;
+	bottom: 0px;
+	right: -200%;
+	color: #412f1f;
+	font-style: italic;
+}
+.sectionATextBackground {
+	background-image: linear-gradient(to left, rgba(242, 174, 106, 0.2), transparent);
+}
+@media only screen and (min-width:950px) {
+
+	/*全屏按钮*/
 	.fullScreen {
 		display: block;
 		position: fixed;
@@ -97,9 +164,6 @@
 		float: right;
 		z-index: 9999;
 	}
-@media only screen and (min-width:950px) {
-
-	
 	.fullScreen p {
 		font-size: 12px;
 		color: #999;
@@ -166,53 +230,32 @@
 		border-left-color: #777;
 	}
 }
-.section{
-	box-shadow: 0 0 20px #666;
-	position: relative;
-	overflow: hidden;
-}
-/*index*/
-
-.sectionABox{
-	width: 106%;
-	height: 106%;
-	position: absolute;
-	top: -2%;
-	left: -2%;
-	background: url(../img/index.jpg) no-repeat center ;
-	background-size: cover;
-	box-shadow: 0 0 20px #666;
-	/*transition: all ease 0.5s;*/
-}
-.indexImg{
-	min-width: 100%;
-	min-height: 100%;
-}
-.sectionALine{
-	position: absolute;
-	top: 10%;
-	right: 15%;
-	height: 75%;
-	width: 75%;
-	transition: all ease 0.5s;
-	/*border-right: 5px solid #e5e5e5;*/
-	/*box-shadow: */
-}
-.sectionALineColor{
-	width: 2px;
-	height: 100%;
-	float: right;
-	background-color: rgba(170,76,38,0.3);
-	border-radius: 1px;
-	/*box-shadow: 0 0 5px #fff;*/
-
-}
-.sectionATitle{
-	float: right;
-	font-size: 7em;
-
-	letter-spacing:20px;
-	color: #905a3d;
-	/*font-style: italic;*/
-
+@media only screen and (max-width:949px) {
+	.aside{
+		background-color: transparent;
+	}
+	/*首页*/
+	.sectionALine h1 {
+		font-size: 35px;
+		line-height: 35px;
+		letter-spacing: 5px;
+		margin-right: 100%;
+	}
+	.sectionALine .en {
+		font-size: 16px;
+		letter-spacing: 2px;
+		padding-right: 3px;
+	}
+	.sectionAText {
+		font-size: 8px;
+		padding-right: 10px;
+		position: absolute;
+		bottom: 0px;
+		right: -200%;
+		color: #412f1f;
+		font-style: italic;
+	}
+	.sectionALine {
+		right: 10%;
+	}
 }

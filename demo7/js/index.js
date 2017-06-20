@@ -12,12 +12,13 @@ $(function() {
 		$liPointer = $(".liPointer"),
 		$aside = $(".aside");
 	$nav = $(".asideNav");
-	$page.append($section);
-	$page.append($section.find(".fullScreen"));
-	$page.append($section.first().clone(true));
+	$page.append($section)
+		.append($section.find(".fullScreen"))
+		.append($section.first().clone(true));
 	$("container").append(".aside");
 	$nav[0].style.marginTop = -$nav[0].offsetHeight / 2 + "px";
 	$(".asideOpen")[0].style.marginTop = -$nav[0].offsetHeight / 2 - 50 + "px";
+
 	var wheel = {
 		scrolling: false,
 		down: function() {
@@ -34,15 +35,12 @@ $(function() {
 			wheel.scrolling = true;
 			var step = -(pageNow - 1) * height + "px";
 			if (fromResize) {
-				$page.css("transition-duration", "0s");
-				$liPointer.css("transition-duration", "0s");
-				$page.css("transform", "translateY(" + step + ")");
-				$liPointer.css("top", (pageNow - 1) * 30 + "px");
+				$page.css("transition-duration", "0s").css("transform", "translateY(" + step + ")");
+				$liPointer.css("transition-duration", "0s").css("top", (pageNow - 1) * 30 + "px");
 				wheel.scrolling = false;
 			} else {
-				$page.css("transition-duration", "1s");
 				$liPointer.css("transition-duration", "1s");
-				$page.css("transform", "translateY(" + step + ")");
+				$page.css("transition-duration", "1s").css("transform", "translateY(" + step + ")");
 				if (pageNow > pageAll) {
 					$liPointer.css("top", "0px");
 				} else {
@@ -52,13 +50,11 @@ $(function() {
 		},
 		moveEnd: function() {
 			if (pageNow > pageAll) {
-				$page.css("transition-duration", "0s");
-				$page.css("transform", "translateY(0px)");
+				$page.css("transition-duration", "0s").css("transform", "translateY(0px)");
 				pageNow = 1;
 			}
 			wheel.scrolling = false;
 		}
-
 	};
 	//鼠标滚轮事件
 	var mousewheelEvent = function(event) {
@@ -113,12 +109,6 @@ $(function() {
 	});
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
-		// var width = window.innerWidth;
-		// if (width < 500) {
-		// 	$aside[0].style.display = "none";
-		// } else {
-		// 	$aside[0].style.display = "block";
-		// };
 		if (height != window.innerHeight) {
 			height = window.innerHeight;
 			$(".section").css("height", height + "px")
@@ -161,14 +151,12 @@ $(function() {
 		},
 		changeStyle: function() {
 			if ($open.html() == "☆") {
-				$open.css("transform", "rotate(360deg)");
-				$open.html("★");
+				$open.css("transform", "rotate(360deg)").html("★");
 				$aside.addClass("asideFixed")
 				$(".aside ul,.asideOpen").addClass("asideColorFixed")
 				$(".asideTitle").addClass("asideTitleFixed")
 			} else {
-				$open.css("transform", "rotate(0deg)");
-				$open.html("☆")
+				$open.css("transform", "rotate(0deg)").html("☆")
 				$aside.removeClass("asideFixed")
 				$(".aside ul,.asideOpen").removeClass("asideColorFixed")
 				$(".asideTitle").removeClass("asideTitleFixed")
@@ -187,12 +175,6 @@ $(function() {
 
 
 
-	$("#progressBar").css("width", "100%");
-	$("#progressMask").fadeOut(200);
-})
-
-//全屏
-$(function() {
 	var isFullScreen = false;
 	//全屏  
 	function fullScreen() {
@@ -231,38 +213,51 @@ $(function() {
 	$(".fullScreen p").click(function(event) {
 		if (isFullScreen) {
 			fullExit();
-			$(".fullScreen p").html("<span>☒</span>全屏浏览");
+			$(this).html("<span>☒</span>全屏浏览");
 		} else {
 			fullScreen();
-			$(".fullScreen p").html("<span>×</span>退出全屏");
+			$(this).html("<span>×</span>退出全屏");
 		}
 	});
 
-})
 
-//首页
-
-$(function() {
+	//重置index窗口位置
+	function resizeIndex() {
+		$(".sectionALine").css("right", "15%").css("top", "10%");
+	}
+	//首页
 	var $sectionABox = $(".sectionABox");
 	var $sectionALine = $(".sectionALine");
-	$sectionABox.mousemove(function(event) {
-			var width = window.innerWidth,
-				height = window.innerHeight,
-				boxValueX = -(event.pageX - width / 2) * 10 / width - 0.02 * width,
-				boxValueY = -(event.pageY - height / 2) * 10 / height - 0.02 * height;
-			$sectionABox.css("left", boxValueX + "px");
-			$sectionABox.css("top", boxValueY + "px");
-			var lineValueX = -(event.pageX - width / 2) * 20 / width + 0.15 * width,
-				lineValueY = -(event.pageY - height / 2) * 15 / height + 0.1 * height;
-			$sectionALine.css("right", lineValueX + "px");
-			$sectionALine.css("top", lineValueY + "px");
+	$sectionALine.animate({top: "10%"}, 500, function() {
+		$sectionALine.children().animate({"right": "0"}, 1000, function() {
+			$(".sectionAText").addClass("sectionATextBackground");
 		})
+		$(".sectionATitle").animate({"margin-right": "0"}, 800)
+	});
+	// 
+	$sectionABox.mousemove(function(event) {
+		var width = window.innerWidth,
+			height = window.innerHeight,
+			boxValueX = -(event.pageX - width / 2) * 10 / width - 0.02 * width,
+			boxValueY = -(event.pageY - height / 2) * 10 / height - 0.02 * height;
+		$sectionABox.css("left", boxValueX + "px")
+			.css("top", boxValueY + "px");
+		var lineValueX = -(event.pageX - width / 2) * 20 / width + 0.15 * width,
+			lineValueY = -(event.pageY - height / 2) * 15 / height + 0.1 * height;
+		$sectionALine.css("right", lineValueX + "px")
+			.css("top", lineValueY + "px");
+		event.preventDefault()
+	})
+
+
+
+	// $(".test").css("position", "absolute").css("top", "100px").css("right", "100px")
+	// 	.click(aLine.in());
+
+
+
+	$("#progressBar").css("width", "100%");
+	$("#progressMask").fadeOut(200);
+
+
 })
-
-
-//重置index窗口位置
-function resizeIndex(){
-	// $(".sectionALine").css("transition","all ease 0.5s");
-	$(".sectionALine").css("right","15%");
-	$(".sectionALine").css("top","10%");
-}
