@@ -18,9 +18,11 @@ $(function() {
 	$("container").append(".aside");
 	$nav[0].style.marginTop = -$nav[0].offsetHeight / 2 + "px";
 	$(".asideOpen")[0].style.marginTop = -$nav[0].offsetHeight / 2 - 50 + "px";
+	$(".music")[0].style.top = $nav[0].offsetHeight / 2 + height / 2+ 50 +"px";
 
 	var wheel = {
 		scrolling: false,
+		backCalling:false,
 		down: function() {
 			pageNow += 1;
 			wheel.move(pageNow);
@@ -32,6 +34,7 @@ $(function() {
 			}
 		},
 		move: function(pageNow, fromResize) {
+			wheel.backCalling = true,
 			wheel.scrolling = true;
 			var step = -(pageNow - 1) * height + "px";
 			if (fromResize) {
@@ -54,7 +57,32 @@ $(function() {
 				pageNow = 1;
 			}
 			wheel.scrolling = false;
+			wheel.backCall();
+		},
+		backCall:function(){
+			if (wheel.backCalling) {
+				wheel.backCalling = false;
+				switch(pageNow){
+					case 1:
+						backCallFn.section1();
+						break;
+					case 2:
+						backCallFn.section2();
+						break;
+					case 3:
+						backCallFn.section3();
+						break;
+					case 4:
+						backCallFn.section4();
+						break;
+					case 5:
+						backCallFn.section5();
+						break;
+				}
+			}
 		}
+
+
 	};
 	//鼠标滚轮事件
 	var mousewheelEvent = function(event) {
@@ -81,6 +109,9 @@ $(function() {
 				break;
 			case 40:
 				wheel.down();
+				break;
+			case 32:
+				music.click();
 				break;
 		}
 	};
@@ -109,6 +140,7 @@ $(function() {
 	});
 	//窗口改变大小事件（自适应）
 	var resizeEvent = function() {
+		$(".music")[0].style.top = $nav[0].offsetHeight / 2 + window.innerHeight / 2+ 50 +"px";
 		if (height != window.innerHeight) {
 			height = window.innerHeight;
 			$(".section").css("height", height + "px")
@@ -155,11 +187,14 @@ $(function() {
 				$aside.addClass("asideFixed")
 				$(".aside ul,.asideOpen").addClass("asideColorFixed")
 				$(".asideTitle").addClass("asideTitleFixed")
+				$(".music").addClass("asideMusicCenter")
+				
 			} else {
 				$open.css("transform", "rotate(0deg)").html("☆")
 				$aside.removeClass("asideFixed")
 				$(".aside ul,.asideOpen").removeClass("asideColorFixed")
 				$(".asideTitle").removeClass("asideTitleFixed")
+				$(".music").removeClass("asideMusicCenter")
 
 			}
 		},
@@ -219,8 +254,6 @@ $(function() {
 			$(this).html("<span>×</span>退出全屏");
 		}
 	});
-
-
 	//重置index窗口位置
 	function resizeIndex() {
 		$(".sectionALine").css("right", "15%").css("top", "10%");
@@ -228,13 +261,16 @@ $(function() {
 	//首页
 	var $sectionABox = $(".sectionABox");
 	var $sectionALine = $(".sectionALine");
+	if (window.innerWidth < 950) {
+		$(".sectionAText").html("<p>我会住在其中的一颗星星上面，</p><p>在某一颗星星上微笑着，</p><p>每当夜晚你仰望星空的时候，</p><p>就会像是看到所有的星星都在微笑一般。</p><p>I will live in one of the stars, </p><p>in a star on a smile, </p><p>every time you look at the sky at night time, </p><p>would like to see all the stars are smiling general.</p>")
+	}
 	$sectionALine.animate({top: "10%"}, 500, function() {
 		$sectionALine.children().animate({"right": "0"}, 1000, function() {
 			$(".sectionAText").addClass("sectionATextBackground");
 		})
 		$(".sectionATitle").animate({"margin-right": "0"}, 800)
 	});
-	// 
+	//首页抖动
 	$sectionABox.mousemove(function(event) {
 		var width = window.innerWidth,
 			height = window.innerHeight,
@@ -248,16 +284,200 @@ $(function() {
 			.css("top", lineValueY + "px");
 		event.preventDefault()
 	})
+	//页面backCall
+	var backCallFn = {
+		section1:function(){
+			console.log("页面1")
+		},
+		section2:function(){
+			$(".sectionBBoxA .sectionBText").animate({margin:"10% 5% 0 30%",opacity:"1"},800,function(){
+				$(".sectionBBtnNext").animate({right:"3%",opacity:"1"})
+			});
+		},
+		section3:function(){
+			$(".sectionCBtn").addClass("rollIn");
+		},
+		section4:function(){
+			console.log("页面4")
+		},
+		section5:function(){
+			console.log("页面5")
+		}
+	}
+	//音乐播放器
+	var music = {
+		playing : false,
+		click:function(){
+			if (music.playing) {
+				music.stop()
+			} else {
+				music.play()
+			}
+		},
+		play:function(){
+			$(".music .button").addClass("buttonPlay");
+			$(".music .musicImg").addClass("play").css("animation-play-state", "running")
+			// $(".music .ball-scale").show()
+			$(".music .ball-scale").fadeIn(1000);
+			// $(".playing").show()
+			$(".playing").fadeIn(1000);
+			$(".music audio")[0].play();
+
+			music.playing = true;
+		},
+		stop:function(){
+			$(".music .button").removeClass("buttonPlay");
+			$(".music .musicImg").removeClass("play").css("animation-play-state", "paused");
+			// $(".music .ball-scale").hide()
+			$(".music .ball-scale").fadeOut();
+			$(".playing").fadeOut();
+			$(".music audio")[0].pause();
+			music.playing = false;
+		}
+
+	};
+	$(".music .button").click(music.click);
+	$(".sectionBText").click(textChange);
+	var changeing = false;
+	function textChange(){
+		if (!changeing) {
+			changeing = true;
+			var	speed = 700,
+				opa = "0.3",
+				$node = $(this),
+				$chs = $node.find(".chs"),
+				$en = $node.find(".en"),
+				height = $chs[0].offsetHeight;
+			if ($chs[0].style.opacity !== "0" ) {
+				$chs.animate({top: - height/2 +"px",opacity:opa},speed)
+				$en.animate({top:height/2 +"px",opacity:opa},speed,function(){
+					$chs.animate({top:"0px",opacity:"0"},speed)
+					$en.animate({top:"0px",opacity:"1"},speed,function(){
+						changeing = false;
+					})
+				})
+			} else {
+				$en.animate({top: - height/2 +"px",opacity:opa},speed)
+				$chs.animate({top: height/2 +"px",opacity:opa},speed,function(){
+					$en.animate({top:"0px",opacity:"0"},speed)
+					$chs.animate({top:"0px",opacity:"1"},speed,function(){
+						changeing = false;
+					})
+				})
+			}
+		}
+	}
+	var $bPageA = $(".sectionBBoxA"),
+		$bPageB = $(".sectionBBoxB"),
+		$bPageC = $(".sectionBBoxC"),
+		$bBtnNext = $(".sectionBBtnNext"),
+		$bBtnBefore = $(".sectionBBtnBefore"),
+		$bBtnNextPage = $(".sectionBBtnNextPage"),
+		sectionBpage = {
+			index:1,
+			clickNext:function(){
+				if (sectionBpage.index ==1) {
+					sectionBpage.index = 2;
+					sectionBpage.next($bPageA,$bPageB);
+					$bBtnBefore.delay(800).animate({right:"3%",opacity:"1"},function(){
+						$(".sectionBBoxB .sectionBText ").animate({opacity:"1"},800)
+					})
+				} else if (sectionBpage.index ==2) {
+					sectionBpage.index = 3;
+					sectionBpage.next($bPageB,$bPageC);
+					$bBtnNext.delay(1000).animate({right:"-80px",opacity:"0"})
+					$bBtnBefore.delay(1000).animate({top:"-=70px"})
+					$bBtnNextPage.delay(1000).animate({right:"3%",opacity:"1"})
+				}
+			},
+			clickBefore:function(){
+				if (sectionBpage.index ==3) {
+					sectionBpage.index = 2;
+					sectionBpage.before($bPageC,$bPageB);
+					$bBtnNext.delay(1000).animate({right:"3%",opacity:"1"})
+					$bBtnBefore.delay(1000).animate({top:"+=70px"})
+					$bBtnNextPage.delay(1000).animate({right:"-80px",opacity:"0"})
+				} else if (sectionBpage.index ==2) {
+					sectionBpage.index = 1;
+					sectionBpage.before($bPageB,$bPageA);
+					$bBtnBefore.delay(1000).animate({right:"-80px",opacity:"0"})
+				}
+			},
+			next:function(hidePage,showPage){
+				hidePage.removeClass("boxLeftIn").removeClass("boxRightIn").addClass("boxLeftOut");
+				showPage.removeClass("boxLeftOut").removeClass("boxRightOut").addClass("boxRightIn");
+			},
+			before:function(hidePage,showPage){
+				hidePage.removeClass("boxLeftIn").removeClass("boxRightIn").addClass("boxRightOut");
+				showPage.removeClass("boxLeftOut").removeClass("boxRightOut").addClass("boxLeftIn");
+			}
+
+	}
+
+	
+	$bBtnNext.click(sectionBpage.clickNext);
+	$bBtnBefore.click(sectionBpage.clickBefore);
+	$bBtnNextPage.click(wheel.down);
+
+//第三页
+	$(".sectionCText").click(function(){
+		var $chs = $(this).find(".chs"),
+			$en =  $(this).find(".en");
+		if ($chs[0].style.opacity !== "0") {
+			$chs.css("opacity","1").css("left","0").animate({opacity:"0",left:"-50%"},600);
+			$en.css("opacity","0").css("left","-50%").animate({opacity:"1",left:"0"},600);
+		} else {
+			$chs.css("opacity","0").css("left","-50%").animate({opacity:"1",left:"0"},600);
+			$en.css("opacity","1").css("left","0").animate({opacity:"0",left:"-50%"},600);
+		}
+	})
+	var cPage = {
+		index:1,
+		arr:["A","B","C","D","E","F"],
+		next:function(){
+			if (cPage.index + 1 <= 6) {
+				cPage.index += 1;
+				cPage.move(cPage.index,true);
+			}
+		},
+		before:function(){
+			if ( cPage.index - 1 >= 1) {
+				cPage.index -= 1;
+				cPage.move(cPage.index,false);
+			}
+		},
+		move:function(index,next){
+			if (next) {
+				console.log("next: Out:" + cPage.arr[index-2] +"&In:"+ cPage.arr[index-1])
+				$(".sectionCBox"+cPage.arr[index-2]).addClass("scaleLeftOut").removeClass("scaleLeftIn").removeClass("scaleRightIn");
+				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleRightIn").removeClass("scaleLeftOut").removeClass("scaleRightOut");
+				if (index == 2) {
+					$(".sectionCBtnBack").addClass("rollSide").removeClass("rollSideHide")
+				} else if (index == 6) {
+					$(".sectionCBtnNext").addClass("rollHide").removeClass("rollSideRes")
+				} 
+			} else {
+				console.log("before: Out:" + cPage.arr[index] +"&In:"+ cPage.arr[index-1])
+				$(".sectionCBox"+cPage.arr[index]).addClass("scaleRightOut").removeClass("scaleLeftIn").removeClass("scaleRightIn");
+				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleLeftIn").removeClass("scaleLeftOut").removeClass("scaleRightOut");
+				if (index == 5) {
+					$(".sectionCBtnNext").addClass("rollSideRes").removeClass("rollHide")
+				} else if (index == 1){
+					// $(".sectionCBtnBack").addClass("rollSideHide").removeClass("rollSide").removeClass("sectionCBtnBack")
+				}
+			}
+		}
+	}
+
+	$(".sectionCBtnNext").click(cPage.next);
+	$(".sectionCBtnBack").click(cPage.before);
 
 
-
-	// $(".test").css("position", "absolute").css("top", "100px").css("right", "100px")
-	// 	.click(aLine.in());
-
-
+	wheel.down();
 
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
 
 
 })
+
