@@ -3,7 +3,9 @@
 	padding: 0;
 	font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
-
+.hide{
+	display: none;
+}
 /*进度条*/
 .progressMask {
 	position: fixed;
@@ -20,12 +22,10 @@
 	height: 5px;
 	box-shadow: 0 0 15px #000;
 }
-
 /*全屏按钮*/
 .fullScreen {
 	display: none;
 }
-
 /*页面容器*/
 .container {
 	position: fixed;
@@ -38,7 +38,6 @@
 .page {
 	transition: all ease 1s;
 }
-
 /*导航栏*/
 .aside {
 	position: fixed;
@@ -152,7 +151,6 @@
 	background-image: linear-gradient(to left, rgba(242, 174, 106, 0.2), transparent);
 }
 @media only screen and (min-width:950px) {
-
 	/*全屏按钮*/
 	.fullScreen {
 		display: block;
@@ -244,22 +242,9 @@
 		background-size: cover;
 		border: 1px solid rgba(0, 0, 0, 0.6);
 		animation: myrotate 15s 0s linear infinite;
-		animation-play-state: paused;		/*animation: rotate 15s 0s linear infinite;*/
-
-		/*transform: rotate(0deg);*/
+		animation-play-state: paused;
 	}
 	@-webkit-keyframes myrotate {
-		0% {
-			transform: rotate(30deg);
-		}
-		50% {
-			transform: rotate(210deg);
-		}
-		100% {
-			transform: rotate(390deg);
-		}
-	}
-	@keyframes myrotate {
 		0% {
 			transform: rotate(30deg);
 		}
@@ -308,15 +293,6 @@
 			opacity: 0;
 		}
 	}
-	@keyframes ball-scale {
-		0% {
-			transform: scale(0.9);
-		}
-		100% {
-			transform: scale(1.5);
-			opacity: 0;
-		}
-	}
 	.ball-scale {
 		background-color: #fff;
 		border-radius: 100%;
@@ -333,17 +309,6 @@
 		display: none;
 	}
 	@-webkit-keyframes playing {
-		0% {
-			height: 10px;
-		}
-		50% {
-			height: 30px;
-		}
-		100% {
-			height: 10px;
-		}
-	}
-	@keyframes playing {
 		0% {
 			height: 10px;
 		}
@@ -410,7 +375,6 @@
 	.aside {
 		background-color: transparent;
 	}
-
 	/*首页*/
 	.sectionALine h1 {
 		font-size: 35px;
@@ -429,6 +393,7 @@
 		right: 10%;
 	}
 }
+/*第二页页面切换*/
 @-webkit-keyframes leftOut {
 	0% {
 		transform: perspective(200px)  rotateY(0);
@@ -495,6 +460,7 @@
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
+
 .sectionBBoxA {
 	background: url(../img/sectionB-1.jpg) no-repeat center;
 	background-size: cover;
@@ -511,11 +477,9 @@
 	transform: perspective(200px)  rotateY(-90deg);
 	transform-origin: right;
 }
+/*第二页文字*/
 .sectionBText {
-	color: #008792;
 	font-size: 18px;
-	width: 60%;
-	margin: 0% 5% 0 30%;
 	opacity: 0;
 	position: relative;
 	font-weight: 600;
@@ -525,32 +489,26 @@
 	top: 0;
 	cursor: default;
 }
+.sectionBText .chs{
+	color: #d93a49;
+}
 .sectionBText .en {
-	color: #BC6300;
+	color: #ef5b9c;
 	opacity: 0;
+}
+.sectionBBoxA .sectionBText {
+	margin: 0% 5% 0 30%;
+	width: 60%;
 }
 .sectionBBoxB .sectionBText {
-	margin: 7% 5% 0 20%;
+	margin: -3% 5% 0 20%;
 	width: 75%;
-	opacity: 0;
-	color: #402e4c;
 }
 .sectionBBoxC .sectionBText {
-	margin: 4% 5% 0 15%;
+	margin: -3% 5% 0 15%;
 	width: 75%;
-	opacity: 1;
-	color: #aa363d;
 }
-.sectionBBoxB div,{
-	background-color: rgba(180,180,180,0.2)
-}
-.sectionBBoxB .en {
-	color: #4a3113;
-}
-.sectionBBoxC .en {
-	color: #225a1f;
-}
-
+/*第二页换页按钮*/
 .sectionBBtn {
 	width: 50px;
 	height: 50px;
@@ -603,7 +561,7 @@
 .sectionBBtnNextPage:hover div{
 	border-top: 15px solid rgba(219, 219, 185, 0.9);
 }
-/*第三页*/
+/*第三页背景*/
 .sectionCBox{
 	width: 100%;
 	height: 100%;
@@ -612,9 +570,6 @@
 	left: 0;
 	transform:translateX(100%);
 	box-shadow: 0 0 30px #000;
-	/*-webkit-animation-fill-mode: both;*/
-	/*animation-fill-mode: both;*/
-	/*left: 100%;*/
 }
 .sectionCBoxA{
 	background: url(../img/sectionC-1.jpg) no-repeat center;
@@ -641,6 +596,7 @@
 	background: url(../img/sectionC-6.jpg) no-repeat center;
 	background-size: cover;
 }
+/*第三页切换动画*/
 .scaleLeftOut{
 	z-index: -1;
 	animation: scaleLeftOut 1.5s 0s ease 1;
@@ -715,43 +671,24 @@
 		transform:translateX(0) scale(1);
 	}
 }
-.sectionCText {
-	color: #7B5535;
-	font-size: 18px;
-	width: 60%;
-	margin: 5% 5% 0 10%;
-	/*opacity: 0;*/
-	position: relative;
-	font-weight: 600;
-}
-.sectionCText div {
-	position: absolute;
-	top: 0;
-	cursor: default;
-	width: 100%;
-}
-.sectionCText .en {
-	color: #443633;
-	opacity: 0;
-}
 
+/*第三页按钮*/
 .sectionCBtn{
 	width: 50px;
 	height: 50px;
 	border-radius: 100%;
-	background-color: rgba(219,219,219,0.3);
+	background-color: rgba(219,219,219,0.5);
 	position: absolute;
 	right: 100%;
 	bottom: 0;
 	z-index: 999;
 	margin: 25px;
 	box-shadow: 0 0 10px #000;
-	/*animation: rollIn 5s 0s ease 1;*/
 }
 .sectionCBtn div{
 	border-top: 20px solid transparent;
 	border-bottom: 20px solid transparent;
-	border-left: 40px solid rgba(253,212,81,0.5);
+	border-left: 40px solid #005344;
 	border-right: none;
 	margin-left: 10px;
 	margin-top: 5px;
@@ -759,7 +696,7 @@
 	cursor: pointer;
 }
 
-@-webkit-keyframes rollIn-1 {
+@-webkit-keyframes rollIn {
 	0% {
 		transform:rotate(-1500deg);
 		right: 100%;
@@ -769,69 +706,297 @@
 		right: 0;
 	}
 }
-@-webkit-keyframes rollSide {
+@-webkit-keyframes backShow {
 	0% {
 		transform:rotate(0);
 		right: 0;
-		/*display: none;*/
-	}
-	1% {
-		transform:rotate(0);
-		right: 0;
-/*		display: block;*/
 	}
 	100% {
 		transform:rotate(-180deg);
 		right: 75px;
-		/*display: block;*/
 	}
 }
-@-webkit-keyframes rollHide {
-	0% {
-		transform:rotate(0);
-		right: 0;
-	}
-	100% {
-		transform:rotate(-180deg);
-		right: -75px;
-	}
-}
-@-webkit-keyframes rollSideHide {
+@-webkit-keyframes backHide {
 	0% {
 		transform:rotate(-180deg);
 		right: 75px;
 	}
 	100% {
-		transform:rotate(-180deg);
-		right: -75px;
+		transform:rotate(0);
+		right: 0;
+	}
+}
+@-webkit-keyframes nextHide {
+	0% {
+		transform:rotate(0);
+		right: 0;
+	}
+	100% {
+		transform:rotate(-630deg);
+		right: 0;
+	}
+}
+@-webkit-keyframes nextShow {
+	0% {
+		transform:rotate(-630deg);
+		right: 0;
+	}
+	100% {
+		transform:rotate(0);
+		right: 0;
 	}
 }
 .rollIn{
 	animation: rollIn 4s 0s ease 1;
 	right: 0;
 }
-
 .sectionCBtnBack{
 	right: 0;
-	display: none;
 }
-.rollSide{
-	animation: rollSide 1.5s 0s ease 1;
+.backShow{
+	animation: backShow 1.5s 0s ease 1;
 	transform:rotate(180deg);
 	right: 75px;
-	display: block;
-	bottom: 0;
-	opacity: 1;
+	z-index: 999;
 }
-.rollHide{
-	animation: rollHide 1.5s 0s ease 1;
-	transform:rotate(-180deg);
-	right: -75px;
-	/*display: none;*/
+.nextHide{
+	animation: nextHide 1.5s 0s ease 1;
+	transform:rotate(-630deg);
+	right: 0;
 }
-.rollSideHide{
-	animation: rollSideHide 2s 0s ease 1;
-	transform:rotate(-180deg);
-	right: -75px;
+.nextShow{
+	animation: nextShow 1.5s 0s ease 1;
+	transform:rotate(0);
+	right: 0;
+}
+.backHide{
+	animation: backHide 1.5s 0s ease 1;
+	transform:rotate(0);
+	right: 0;
+	z-index: 950;
+}
+/*第三页文字*/
+.sectionCText {
+	font-size: 18px;	
+	position: relative;
+	opacity: 0;
+}
+.sectionCText div {
+	position: absolute;
+	top: 0;
+	cursor: default;
+	width: 100%;
+}
+.sectionCText .chs {
+	color: #1d953f;
+}
+.sectionCText .en {
+	color: #007d65;
+	opacity: 0;
+}
+.sectionCBoxA .sectionCText{
+	width: 60%;
+	margin: 5% 5% 0 10%;
+	font-weight: 600;
+}
+.sectionCBoxB .sectionCText{
+	width: 80%;
+	margin: 5% 5% 0 10%;
+	font-weight: 600;
+}
+.sectionCBoxC .sectionCText{
+	position: absolute;
+	bottom: 50%;
+	margin: 0 0 0 20%;
+	width: 80%;
+}
+.sectionCBoxD .sectionCText{
+	position: absolute;
+	bottom: 30%;
+	right: 5%;
+	margin: 0 0 0 20%;
+	width: 80%;
+}
+.sectionCBoxE .sectionCText{
+	position: absolute;
+	bottom: 50%;
+	left: 45%;
+	margin: 0;
+	width: 50%;
+}
+.sectionCBoxF .sectionCText{
+	margin: 5% 0 0 15%;
+	width: 50%;
 }
 
+/*第四页背景*/
+.sectionDBox{
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 0 30px #000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform:scale(0.6) rotate(270deg) translateX(200%);
+}
+.sectionDBoxA{
+	background: url(../img/sectionD-1.jpg) no-repeat center;
+	background-size: cover;
+	transform:scale(1) rotate(0) translateX(0);
+}
+.sectionDBoxB{
+	background: url(../img/sectionD-2.jpg) no-repeat center;
+	background-size: cover;
+}
+.sectionDBoxC{
+	background: url(../img/sectionD-3.jpg) no-repeat center;
+	background-size: cover;
+}
+.sectionDBoxD{
+	background: url(../img/sectionD-4.jpg) no-repeat center;
+	background-size: cover;
+}
+.sectionDBoxE{
+	background: url(../img/sectionD-5.jpg) no-repeat center;
+	background-size: cover;
+}
+@-webkit-keyframes shrinkHide {
+	0% {
+		transform:scale(1) rotate(0) translateX(0);
+	}
+	20% {
+		transform:scale(0.8) rotate(0) translateX(0);
+	}
+	60% {
+		transform:scale(0.6) rotate(270deg) translateX(0);
+	}
+	100% {
+		transform:scale(0.6) rotate(270deg) translateX(200%);
+	}
+}
+@-webkit-keyframes shrinkShow {
+	0% {
+		transform:scale(0.6) rotate(270deg) translateX(-200%);
+	}
+	50% {
+		transform:scale(0.6) rotate(270deg) translateX(-200%);
+	}
+	70% {
+		transform:scale(0.6) rotate(270deg) translateX(0);
+	}
+	90% {
+		transform:scale(0.8) rotate(0) translateX(0);
+	}
+	100% {
+		transform:scale(1) rotate(0) translateX(0);
+	}
+}
+.shrinkHide {
+	animation: shrinkHide 1.2s 0s ease 1;
+	transform:scale(0.6) rotate(270deg) translateX(200%);
+}
+.shrinkShow {
+	animation: shrinkShow 2s 0s ease 1;
+	transform:scale(1) rotate(0) translateX(0);
+}
+/*第四页按钮*/
+.sectionDBtn{
+	width: 80px;
+	height: 40px;
+	border-radius: 20px;
+	border: 2px solid #fff;
+	color: #fff;
+	position: absolute;
+	bottom: 2%;
+	margin: 0 1%;
+	cursor: pointer;
+	z-index: 9999;
+}
+.sectionDBtnNext{
+	left: 50%;
+}
+.sectionDBtnBack{
+	right: 50%;
+	opacity:0;
+}
+.sectionDBtn p{
+	text-align: center;
+	line-height: 40px;
+}
+.shake{
+	animation: shake 0.1s 0s ease 20;
+}
+@-webkit-keyframes shake {
+	0% {
+		transform:rotate(0);
+	}
+	25% {
+		transform:rotate(10deg);
+	}
+	50% {
+		transform:rotate(0deg);
+	}
+	75% {
+		transform:rotate(-10deg);
+	}
+	100% {
+		transform:rotate(0);
+	}
+}
+/*第四页文字*/
+.sectionDText {
+	font-size: 18px;	
+	position: relative;
+	font-weight: 600;
+	opacity: 0;
+}
+.sectionDText div {
+	position: absolute;
+	top: 0;
+	cursor: default;
+	width: 100%;
+}
+.sectionDText .chs {
+	color: #009ad6;
+	/*opacity: 0;*/
+}
+.sectionDText .en {
+	color: #7bbfea;
+	opacity: 0;
+}
+.sectionDBoxA .sectionDText{
+	width: 60%;
+	margin: 15% 5% 0 10%;
+	/*opacity: 1;*/
+}
+.sectionDBoxB .sectionDText{
+	width: 60%;
+	margin: 5% 5% 0 20%;
+}
+.sectionDBoxC .sectionDText,.sectionDBoxE .sectionDText{
+	width: 70%;
+	margin: 3% 15% 0 15%;
+}
+.sectionDBoxD .sectionDText{
+	width: 40%;
+	margin: 10%  0 0 15%;
+}
+@-webkit-keyframes scaleRotate{
+	0% {
+		transform:scale(0) rotate(0);
+	}
+	70% {
+		transform:scale(0.3) rotate(180deg);
+	}
+	100% {
+		transform:scale(1) rotate(360deg);
+	}
+}
+.scaleRotate{
+	animation: scaleRotate 2.5s 0s ease 1;
+}
+/*第五页*/
+.sectionE{
+	background: url(../img/sectionE.jpg) no-repeat center;
+	background-size: cover;
+}

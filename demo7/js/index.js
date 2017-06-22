@@ -290,15 +290,16 @@ $(function() {
 			console.log("页面1")
 		},
 		section2:function(){
-			$(".sectionBBoxA .sectionBText").animate({margin:"10% 5% 0 30%",opacity:"1"},800,function(){
+			$(".sectionBBoxA .sectionBText").animate({marginTop:"10%",opacity:"1"},800,function(){
 				$(".sectionBBtnNext").animate({right:"3%",opacity:"1"})
 			});
 		},
 		section3:function(){
 			$(".sectionCBtn").addClass("rollIn");
+			$(".sectionCBoxA .sectionCText").delay(300).animate({opacity:"1"},500)
 		},
 		section4:function(){
-			console.log("页面4")
+			$(".sectionDBoxA .sectionDText").animate({opacity:"1",marginTop:"35%"},500)
 		},
 		section5:function(){
 			console.log("页面5")
@@ -380,12 +381,14 @@ $(function() {
 					sectionBpage.index = 2;
 					sectionBpage.next($bPageA,$bPageB);
 					$bBtnBefore.delay(800).animate({right:"3%",opacity:"1"},function(){
-						$(".sectionBBoxB .sectionBText ").animate({opacity:"1"},800)
+						$(".sectionBBoxB .sectionBText ").animate({opacity:"1",marginTop:"7%"},800)
 					})
 				} else if (sectionBpage.index ==2) {
 					sectionBpage.index = 3;
 					sectionBpage.next($bPageB,$bPageC);
-					$bBtnNext.delay(1000).animate({right:"-80px",opacity:"0"})
+					$bBtnNext.delay(1000).animate({right:"-80px",opacity:"0"},function(){
+						$(".sectionBBoxC .sectionBText ").animate({opacity:"1",marginTop:"4%"},800)
+					})
 					$bBtnBefore.delay(1000).animate({top:"-=70px"})
 					$bBtnNextPage.delay(1000).animate({right:"3%",opacity:"1"})
 				}
@@ -438,6 +441,8 @@ $(function() {
 			if (cPage.index + 1 <= 6) {
 				cPage.index += 1;
 				cPage.move(cPage.index,true);
+			}else{
+				wheel.down();
 			}
 		},
 		before:function(){
@@ -450,20 +455,21 @@ $(function() {
 			if (next) {
 				console.log("next: Out:" + cPage.arr[index-2] +"&In:"+ cPage.arr[index-1])
 				$(".sectionCBox"+cPage.arr[index-2]).addClass("scaleLeftOut").removeClass("scaleLeftIn").removeClass("scaleRightIn");
-				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleRightIn").removeClass("scaleLeftOut").removeClass("scaleRightOut");
+				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleRightIn").removeClass("scaleLeftOut").removeClass("scaleRightOut").children().delay(800).animate({opacity:"1"},500);
+				console.log($(".sectionCBox"+cPage.arr[index-1]).children()[0])
 				if (index == 2) {
-					$(".sectionCBtnBack").addClass("rollSide").removeClass("rollSideHide")
+					$(".sectionCBtnBack").addClass("backShow").removeClass("backHide").removeClass("hide")
 				} else if (index == 6) {
-					$(".sectionCBtnNext").addClass("rollHide").removeClass("rollSideRes")
+					$(".sectionCBtnNext").addClass("nextHide").removeClass("nextShow")
 				} 
 			} else {
 				console.log("before: Out:" + cPage.arr[index] +"&In:"+ cPage.arr[index-1])
 				$(".sectionCBox"+cPage.arr[index]).addClass("scaleRightOut").removeClass("scaleLeftIn").removeClass("scaleRightIn");
 				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleLeftIn").removeClass("scaleLeftOut").removeClass("scaleRightOut");
 				if (index == 5) {
-					$(".sectionCBtnNext").addClass("rollSideRes").removeClass("rollHide")
+					$(".sectionCBtnNext").addClass("nextShow").removeClass("nextHide")
 				} else if (index == 1){
-					// $(".sectionCBtnBack").addClass("rollSideHide").removeClass("rollSide").removeClass("sectionCBtnBack")
+					$(".sectionCBtnBack").addClass("backHide").removeClass("backShow")
 				}
 			}
 		}
@@ -471,6 +477,66 @@ $(function() {
 
 	$(".sectionCBtnNext").click(cPage.next);
 	$(".sectionCBtnBack").click(cPage.before);
+
+var dPage = {
+		index:1,
+		arr:["A","B","C","D","E"],
+		next:function(){
+			if (dPage.index + 1 <= 5) {
+				dPage.index += 1;
+				dPage.move(dPage.index,true);
+			}
+		},
+		before:function(){
+			if ( dPage.index - 1 >= 1) {
+				dPage.index -= 1;
+				dPage.move(dPage.index,false);
+			}
+		},
+		move:function(index,next){
+			var $indexNow = $(".sectionDBox"+cPage.arr[index-1]),
+				$btnNext = $(".sectionDBtnNext"),
+				$btnBack = $(".sectionDBtnBack");
+			if (next) {
+				$(".sectionDBox"+cPage.arr[index-2]).addClass("shrinkHide").removeClass("shrinkShow");
+				$indexNow.addClass("shrinkShow").removeClass("shrinkHide");
+				dPage.textShow($indexNow);
+				if (index == 2) {
+					 $btnBack.addClass("shake").animate({opacity:1},800,function(){
+					 	$(this).delay(1000).removeClass("shake")
+					 })
+				} else if (index == 5) {
+					$btnNext.addClass("shake").delay(600).animate({opacity:0},800,function(){
+					 	$(this).removeClass("shake")
+					 })
+				} 
+			} else {
+				var $indexNow = $(".sectionDBox"+cPage.arr[index-1]);
+				$(".sectionDBox"+cPage.arr[index]).addClass("shrinkHide").removeClass("shrinkShow");
+				$indexNow.addClass("shrinkShow").removeClass("shrinkHide");
+				dPage.textShow($indexNow);
+				if (index == 4) {
+					$btnNext.addClass("shake").animate({opacity:1},800,function(){
+					 	$(this).delay(1000).removeClass("shake")
+					 })
+				} else if (index == 1){
+					$btnBack.addClass("shake").delay(600).animate({opacity:0},800,function(){
+					 	$(this).removeClass("shake")
+					 })
+				}
+			}
+		},
+		textShow:function(node){//node父节点
+			node.children().css("opacity","0").delay(2000).addClass("scaleRotate").animate({opacity:1},800,function(){
+					$(this).delay(1000).removeClass("scaleRotate")
+				});
+		}
+	}
+	$(".sectionDBtnNext").click(dPage.next)
+	$(".sectionDBtnBack").click(dPage.before)
+
+
+
 
 
 	wheel.down();
