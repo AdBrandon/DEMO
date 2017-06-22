@@ -339,6 +339,7 @@ $(function() {
 	};
 	$(".music .button").click(music.click);
 	$(".sectionBText").click(textChange);
+	$(".sectionBText")[0].addEventListener("touchstart",textChange);
 	var changeing = false;
 	function textChange(){
 		if (!changeing) {
@@ -419,11 +420,13 @@ $(function() {
 
 	
 	$bBtnNext.click(sectionBpage.clickNext);
+	$bBtnNext[0].addEventListener("touchstart",sectionBpage.clickNext);
 	$bBtnBefore.click(sectionBpage.clickBefore);
+	$bBtnBefore[0].addEventListener("touchstart",sectionBpage.clickBefore);
 	$bBtnNextPage.click(wheel.down);
-
+	$bBtnNextPage[0].addEventListener("touchstart",wheel.down);
 //第三页
-	$(".sectionCText").click(function(){
+	function cTextChange(){
 		var $chs = $(this).find(".chs"),
 			$en =  $(this).find(".en");
 		if ($chs[0].style.opacity !== "0") {
@@ -433,8 +436,12 @@ $(function() {
 			$chs.css("opacity","0").css("left","-50%").animate({opacity:"1",left:"0"},600);
 			$en.css("opacity","1").css("left","0").animate({opacity:"0",left:"-50%"},600);
 		}
-	})
-	var cPage = {
+	}
+	$(".sectionCText").click(cTextChange);
+	// $(".sectionCText")[0].addEventListener("touchstart",cTextChange);
+	var $cBtnNext = $(".sectionCBtnNext"),
+		$cBtnBack = $(".sectionCBtnBack"),
+		cPage = {
 		index:1,
 		arr:["A","B","C","D","E","F"],
 		next:function(){
@@ -458,27 +465,30 @@ $(function() {
 				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleRightIn").removeClass("scaleLeftOut").removeClass("scaleRightOut").children().delay(800).animate({opacity:"1"},500);
 				console.log($(".sectionCBox"+cPage.arr[index-1]).children()[0])
 				if (index == 2) {
-					$(".sectionCBtnBack").addClass("backShow").removeClass("backHide").removeClass("hide")
+					$cBtnBack.addClass("backShow").removeClass("backHide").removeClass("hide")
 				} else if (index == 6) {
-					$(".sectionCBtnNext").addClass("nextHide").removeClass("nextShow")
+					$cBtnNext.addClass("nextHide").removeClass("nextShow")
 				} 
 			} else {
 				console.log("before: Out:" + cPage.arr[index] +"&In:"+ cPage.arr[index-1])
 				$(".sectionCBox"+cPage.arr[index]).addClass("scaleRightOut").removeClass("scaleLeftIn").removeClass("scaleRightIn");
 				$(".sectionCBox"+cPage.arr[index-1]).addClass("scaleLeftIn").removeClass("scaleLeftOut").removeClass("scaleRightOut");
 				if (index == 5) {
-					$(".sectionCBtnNext").addClass("nextShow").removeClass("nextHide")
+					$cBtnNext.addClass("nextShow").removeClass("nextHide")
 				} else if (index == 1){
-					$(".sectionCBtnBack").addClass("backHide").removeClass("backShow")
+					$cBtnBack.addClass("backHide").removeClass("backShow")
 				}
 			}
 		}
 	}
 
-	$(".sectionCBtnNext").click(cPage.next);
-	$(".sectionCBtnBack").click(cPage.before);
-
-var dPage = {
+	$cBtnNext.click(cPage.next);
+	$cBtnNext[0].addEventListener("touchstart",cPage.next);
+	$cBtnBack.click(cPage.before);
+	$cBtnBack[0].addEventListener("touchstart",cPage.before);
+	var $dBtnNext = $(".sectionDBtnNext"),
+		$dBtnBack = $(".sectionDBtnBack"),
+	dPage = {
 		index:1,
 		arr:["A","B","C","D","E"],
 		next:function(){
@@ -494,19 +504,17 @@ var dPage = {
 			}
 		},
 		move:function(index,next){
-			var $indexNow = $(".sectionDBox"+cPage.arr[index-1]),
-				$btnNext = $(".sectionDBtnNext"),
-				$btnBack = $(".sectionDBtnBack");
+			var $indexNow = $(".sectionDBox"+cPage.arr[index-1]);
 			if (next) {
 				$(".sectionDBox"+cPage.arr[index-2]).addClass("shrinkHide").removeClass("shrinkShow");
 				$indexNow.addClass("shrinkShow").removeClass("shrinkHide");
 				dPage.textShow($indexNow);
 				if (index == 2) {
-					 $btnBack.addClass("shake").animate({opacity:1},800,function(){
+					 $dBtnBack.addClass("shake").animate({opacity:1},800,function(){
 					 	$(this).delay(1000).removeClass("shake")
 					 })
 				} else if (index == 5) {
-					$btnNext.addClass("shake").delay(600).animate({opacity:0},800,function(){
+					$dBtnNext.addClass("shake").delay(600).animate({opacity:0},800,function(){
 					 	$(this).removeClass("shake")
 					 })
 				} 
@@ -516,11 +524,11 @@ var dPage = {
 				$indexNow.addClass("shrinkShow").removeClass("shrinkHide");
 				dPage.textShow($indexNow);
 				if (index == 4) {
-					$btnNext.addClass("shake").animate({opacity:1},800,function(){
+					$dBtnNext.addClass("shake").animate({opacity:1},800,function(){
 					 	$(this).delay(1000).removeClass("shake")
 					 })
 				} else if (index == 1){
-					$btnBack.addClass("shake").delay(600).animate({opacity:0},800,function(){
+					$dBtnBack.addClass("shake").delay(600).animate({opacity:0},800,function(){
 					 	$(this).removeClass("shake")
 					 })
 				}
@@ -532,17 +540,15 @@ var dPage = {
 				});
 		}
 	}
-	$(".sectionDBtnNext").click(dPage.next)
-	$(".sectionDBtnBack").click(dPage.before)
+	$dBtnNext.click(dPage.next);
+	$dBtnNext[0].addEventListener("touchstart",dPage.next);
+	$dBtnBack.click(dPage.before);
+	$dBtnBack[0].addEventListener("touchstart",dPage.before);
 
-
-
-
-
-	wheel.down();
 
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
+
 
 
 })
