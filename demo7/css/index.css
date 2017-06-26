@@ -1,10 +1,11 @@
-/*声明 WebFont*/
 @font-face {
-  font-family: 'SNT';
-  src:
-    url('../font/SNT.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: "SNT";
+    src: url("SNT.eot"); /* IE9 */
+    src: url("SNT.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("SNT.woff") format("woff"), /* chrome、firefox */
+    url("SNT.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+    font-style: normal;
+    font-weight: normal;
 }
 * {
 	margin: 0;

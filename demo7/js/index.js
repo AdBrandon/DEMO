@@ -696,14 +696,14 @@ $(function() {
 		sectionDText[i].addEventListener("touchstart",sectionD.textChange);
 		sectionDText[i].addEventListener("click",sectionD.textChange);
 	}
-	$("#progressBar").css("width", "100%");
-	$("#progressMask").fadeOut(200);
+
 
 	//微信二维码事件
 	$(".wechat").click(function(){
 		$(".QR").fadeToggle();
 	});
 
-
+	$("#progressBar").css("width", "100%");
+	$("#progressMask").fadeOut(200);
 })
 
