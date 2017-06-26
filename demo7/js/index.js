@@ -87,7 +87,7 @@ $(function() {
 						$(".sectionCBoxA .sectionCText").delay(300).animate({opacity:"1"},500)
 						break;
 					case 4:
-						$(".sectionDBoxA .sectionDText").animate({opacity:"1",marginTop:"35%"},500)
+						$(".sectionDBoxA .sectionDText").animate({opacity:"1",marginTop:"25%"},500)
 						break;
 					case 5:
 						break;
@@ -204,9 +204,8 @@ $(function() {
 				$(".aside ul,.asideOpen").addClass("asideColorFixed")
 				$(".asideTitle").addClass("asideTitleFixed")
 				$music.addClass("asideMusicCenter")
-
 				$(".textBox").addClass("textBoxShow").removeClass("textBoxHide")
-
+				asideOpen.mainTextChange();
 
 			} else {
 				$(".textBox").addClass("textBoxHide").removeClass("textBoxShow")
@@ -215,7 +214,20 @@ $(function() {
 				$(".aside ul,.asideOpen").removeClass("asideColorFixed")
 				$(".asideTitle").removeClass("asideTitleFixed")
 				$music.removeClass("asideMusicCenter")
+				asideOpen.mainTextBack();
 			}
+		},
+		mainTextChange:function(){
+			$(".sectionBText,.sectionCText,.sectionDText").each(function(){
+				if (parseInt($(this).css("marginLeft")) < 300) {
+					$(this).addClass("whenAsideOpen1");
+				}
+			})
+			$(".sectionE .box").addClass("whenAsideOpen2");
+		},
+		mainTextBack:function(){
+			$(".sectionBText,.sectionCText,.sectionDText").removeClass("whenAsideOpen1");
+			$(".sectionE .box").removeClass("whenAsideOpen2");
 		},
 		transitEnd: function() {
 			asideOpen.transitting = false;
@@ -226,35 +238,35 @@ $(function() {
 				pos = $(".aside .textBox").attr("data-index");
 				if (pos == "A") {
 					if (btn == "A") {
-						asideOpen.$box.attr("class","textBox Aup").attr("data-index","B");
+						asideOpen.$box.attr("class","textBox textBoxShow Aup").attr("data-index","B");
 					} else{
 						if (asideOpen.$box.hasClass("Ashake")) {
-							asideOpen.$box.attr("class","textBox AshakeToo")
+							asideOpen.$box.attr("class","textBox textBoxShow AshakeToo")
 						}else{
-							asideOpen.$box.attr("class","textBox Ashake")
+							asideOpen.$box.attr("class","textBox textBoxShow Ashake")
 						}
 					}
 				} else if (pos == "B") {
 					if (btn == "A") {
-						asideOpen.$box.attr("class","textBox Adown").attr("data-index","A");
+						asideOpen.$box.attr("class","textBox textBoxShow Adown").attr("data-index","A");
 					} else if (btn == "B") {
 						if (asideOpen.$box.hasClass("Bshake")) {
-							asideOpen.$box.attr("class","textBox BshakeToo")
+							asideOpen.$box.attr("class","textBox textBoxShow BshakeToo")
 						}else{
-							asideOpen.$box.attr("class","textBox Bshake")
+							asideOpen.$box.attr("class","textBox textBoxShow Bshake")
 						}
 					} else if(btn == "C"){
-						asideOpen.$box.attr("class","textBox Cdown").attr("data-index","C");
+						asideOpen.$box.attr("class","textBox textBoxShow Cdown").attr("data-index","C");
 					}
 					
 				} else if (pos == "C"){
 					if (btn == "C") {
-						asideOpen.$box.attr("class","textBox Cup").attr("data-index","B");
+						asideOpen.$box.attr("class","textBox textBoxShow Cup").attr("data-index","B");
 					}else{
 						if (asideOpen.$box.hasClass("Cshake")) {
-							asideOpen.$box.addClass("CshakeToo").removeClass("Cshake");
+							asideOpen.$box.attr("class","textBox textBoxShow CshakeToo")
 						}else{
-							asideOpen.$box.addClass("Cshake").removeClass("CshakeToo");
+							asideOpen.$box.attr("class","textBox textBoxShow Cshake")
 						}
 					}
 				}
@@ -684,12 +696,13 @@ $(function() {
 		sectionDText[i].addEventListener("touchstart",sectionD.textChange);
 		sectionDText[i].addEventListener("click",sectionD.textChange);
 	}
-
-
-
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);
 
+	//微信二维码事件
+	$(".wechat").click(function(){
+		$(".QR").fadeToggle();
+	});
 
 
 })
