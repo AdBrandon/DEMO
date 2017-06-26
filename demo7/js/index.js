@@ -12,6 +12,7 @@ $(function() {
 		height = window.innerHeight,
 		pageNow = 1,
 		pageAll = $section.length;
+		smallScreen = false;
 	//基本UI设置
 	$section.css("height", height + "px");
 	$nav[0].style.marginTop = -$nav[0].offsetHeight / 2 + "px";
@@ -19,6 +20,9 @@ $(function() {
 	$music[0].style.top = $nav[0].offsetHeight / 2 + height / 2+ 50 +"px";
 	$page.append($section.find(".fullScreen"))
 		.append($section.first().clone(true));
+	if (window.innerWidth < 950) {
+		smallScreen	= true;
+	}
 
 	//页面滚动对象
 	var wheel = {
@@ -360,14 +364,6 @@ $(function() {
 	sectionA.active();
 	//首页抖动
 	$sectionABox.mousemove(sectionA.mousemoveEvent);
-
-	
-	//兼容性处理
-	if (window.innerWidth < 950) {
-		$(".sectionAText").html("<p>我会住在其中的一颗星星上面，</p><p>在某一颗星星上微笑着，</p><p>每当夜晚你仰望星空的时候，</p><p>就会像是看到所有的星星都在微笑一般。</p><p>I will live in one of the stars, </p><p>in a star on a smile, </p><p>every time you look at the sky at night time, </p><p>would like to see all the stars are smiling general.</p>")
-	}
-
-	
 	//音乐播放器
 	var music = {
 		$btn:$(".music .button"),
@@ -385,6 +381,11 @@ $(function() {
 			$(".music .ball-scale").fadeIn(1000);
 			$(".playing").fadeIn(1000);
 			$(".music audio")[0].play();
+			if (smallScreen) {
+				setTimeout(function(){
+					music.in();
+				},600)
+			}
 			music.playing = true;
 		},
 		stop:function(){
@@ -393,17 +394,38 @@ $(function() {
 			$(".music .ball-scale").fadeOut();
 			$(".playing").fadeOut();
 			$(".music audio")[0].pause();
+			if (smallScreen) {
+				setTimeout(function(){
+					music.in();
+				},600)
+			}
 			music.playing = false;
 		},
 		loading:function(){
 			$("audio").html("<source src='music/Preparation.ogg' type='audio/ogg'><source src='music/Preparation.mp3' type='audio/mpeg'>")
-		}
+		},
+		out:function(){
+			$music.animate({left:"0"},200);
+			// console.log($(".music .button")[0])
+			// $(".music .button").addClass("block");
+			music.$btn.addClass("block");
 
+		},
+		in:function(){
+			$music.animate({left:"-75px"},500,function(){
+				music.$btn.removeClass("block")
+			})
+		}
 	};
 	// 加载音乐资源
 	music.loading();
 	//播放事件绑定
 	music.$btn.click(music.click);
+	// music.$btn[0].addEventListener("touchstart", music.click);
+	if (smallScreen) {
+		$music.click(music.out)
+		// $music[0].addEventListener("touchstart", music.out);
+	}
 
 	// 第二页
 	var sectionB = {
@@ -702,6 +724,24 @@ $(function() {
 	$(".wechat").click(function(){
 		$(".QR").fadeToggle();
 	});
+
+	//小屏幕事件处理
+	if (window.innerWidth < 950) {
+		// var music = {
+		// 	$music:$(".music"),
+		// 	out:function(){
+		// 		music.$music.animate({left:"0"})
+		// 	},
+		// 	in:function(){
+		// 		music.$music.animate({left:"-75px"})
+		// 	}
+		// }
+		// music.$music.click(music.out)
+		// music.$music[0].addEventListener("touchstart", music.out);
+		// 	// music.$btn[0].addEventListener("touchstart", wheel.touchstartEvent);
+	}
+
+
 
 	$("#progressBar").css("width", "100%");
 	$("#progressMask").fadeOut(200);

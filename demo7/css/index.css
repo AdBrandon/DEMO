@@ -22,7 +22,10 @@
 	font-size: 1.4em;
 }
 .hide {
-	display: none;
+	display: none !important;
+}
+.block {
+	display: block !important;
 }
 
 /*进度条*/
@@ -108,6 +111,43 @@
 .asideTitle {
 	display: none;
 }
+.music {
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	left: -75px;
+	transition: all ease 0.5s;
+}
+.musicImg {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	background: url(../img/music.jpg) no-repeat center;
+	background-size: cover;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+	animation: myrotate 15s linear 0s infinite;
+	animation-play-state: paused;
+}
+.button {
+		display: none;
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;
+		border-left: 20px solid rgba(0, 0, 0, 0.3);
+		position: absolute;
+		left: 68px;
+		top: 60px;
+		cursor: pointer;
+	}
+	.buttonPlay {
+		border: none;
+		border-left: 5px solid rgba(0, 0, 0, 0.3);
+		border-right: 5px solid rgba(0, 0, 0, 0.3);
+		width: 10px;
+		height: 20px;
+		position: absolute;
+		left: 66px;
+		top: 65px;
+	}
 .section {
 	box-shadow: 0 0 20px #666;
 	position: relative;
@@ -1891,49 +1931,13 @@ a {
 		transition: all ease 1s;
 		border-left-color: #777;
 	}
-	.music {
-		width: 150px;
-		height: 150px;
-		position: absolute;	/*left: 50px;	*/
-		left: -75px;
-		transition: all ease 0.5s;
-	}
-	.musicImg {
-		width: 100%;
-		height: 100%;
-		border-radius: 100%;
-		background: url(../img/music.jpg) no-repeat center;
-		background-size: cover;
-		border: 1px solid rgba(0, 0, 0, 0.6);
-		animation: myrotate 15s linear 0s infinite;
-		animation-play-state: paused;
-	}
 	.aside:hover .music, .asideMusicCenter {
 		left: 50px;
 	}
 	.musicImg:hover ~ .button, .button:hover {
 		display: block;
 	}
-	.button {
-		display: none;
-		border-top: 15px solid transparent;
-		border-bottom: 15px solid transparent;
-		border-left: 20px solid rgba(0, 0, 0, 0.3);
-		position: absolute;
-		left: 68px;
-		top: 60px;
-		cursor: pointer;
-	}
-	.buttonPlay {
-		border: none;
-		border-left: 5px solid rgba(0, 0, 0, 0.3);
-		border-right: 5px solid rgba(0, 0, 0, 0.3);
-		width: 10px;
-		height: 20px;
-		position: absolute;
-		left: 66px;
-		top: 65px;
-	}
+	
 	audio {
 		display: none;
 	}
@@ -2020,6 +2024,9 @@ a {
 	}
 
 	/*首页*/
+	.sectionAText span{
+		display: block;
+	}
 	.sectionALine h1 {
 		font-size: 35px;
 		line-height: 35px;
