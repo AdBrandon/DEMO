@@ -1,0 +1,16 @@
+<view class="container">
+
+<view class="nav">
+  <text bindtap="navigate">Year</text>
+  <text>Life</text>
+</view>
+
+<!--<view class="monthList" wx:for="{{items}}" wx:key="{{item.userId}} wx:for-index="idx"">
+        <view data-idx="{{idx}}" bindtap="userListAction">{{item.name}}</view>
+</view>-->
+<view class="box">
+  <view class="monthList" wx:for="{{list}}"  style="background-color:{{item.color}}">{{index}}</view>
+</view>
+
+
+</view>
