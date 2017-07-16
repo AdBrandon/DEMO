@@ -3,7 +3,7 @@
 > 《小王子》是一本写给大人们的童话，让大人们意识到自己曾经是个小孩，提醒大人们不要忘记生命中的美好。
 
 ## 站点
-  [GitHub在线预览](https://AdBrandon.github.io/TheLittlePrince/index.html)
+  [GitHub在线预览](https://AdBrandon.github.io/repositories/TheLittlePrince/index.html)
 
 ## about
   由HTML、CSS、JavaScript+jQuery制作。
